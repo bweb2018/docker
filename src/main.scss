@@ -1,0 +1,30 @@
+$colors: #455A64 #607D8B #CFD8DC #FFFFFF #9E9E9E #212121 #757575 #BDBDBD;
+$names: 'pd' 'p' 'pl' 't' 'a' 'pt' 'st' 'd';
+// PrimaryDark Primary PrimaryLight Text Accent PrimaryText SecondaryText Divider
+
+@for $i from 1 through length($colors) {
+    .c-#{nth($names, $i)} {
+        color: nth($colors, $i);
+    }
+    .hover-#{nth($names, $i)}:hover {
+        color: nth($colors, $i);
+    }
+    .hover-bg-#{nth($names, $i)}:hover {
+        background-color: nth($colors, $i);
+    }
+    .bg-#{nth($names, $i)} {
+        background-color: nth($colors, $i);
+    }
+    .b--#{nth($names, $i)} {
+        border-color: nth($colors, $i);
+    }
+}
+
+.block {
+    box-shadow: 0 10px 25px 0 rgba(50, 94, 128, .2);
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+}

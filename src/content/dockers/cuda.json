@@ -1,0 +1,740 @@
+{
+  "name": "CUDA",
+  "base": "nvidia/cuda",
+  "icon": "fa fa-desktop",
+  "config": [
+    {
+      "label": "Customize Docker",
+      "name": "tag",
+      "type": "tag-group",
+      "groupLabels": [
+        "Operating System",
+        "CUDA Version",
+        "Flavor",
+        "CUDNN Version"
+      ],
+      "tags": [
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "10.0",
+            "Runtime",
+            "Default"
+          ],
+          "name": "10.0-runtime-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "10.0",
+            "Devel",
+            "Default"
+          ],
+          "name": "10.0-devel-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "10.0",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "10.0-cudnn7-runtime-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "10.0",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "10.0-cudnn7-devel-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "10.0",
+            "Runtime",
+            "Default"
+          ],
+          "name": "10.0-runtime-ubuntu18.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "10.0",
+            "Devel",
+            "Default"
+          ],
+          "name": "10.0-devel-ubuntu18.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "10.0",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "10.0-cudnn7-runtime-ubuntu18.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "10.0",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "10.0-cudnn7-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "8.0",
+            "Runtime",
+            "Default"
+          ],
+          "name": "8.0-runtime-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "8.0",
+            "Devel",
+            "Default"
+          ],
+          "name": "8.0-devel-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "10.0",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "10.0-cudnn7-devel-ubuntu18.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "10.0",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "10.0-cudnn7-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "8.0",
+            "Runtime",
+            "CUDNN 6"
+          ],
+          "name": "8.0-cudnn6-runtime-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "8.0",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "8.0-cudnn7-runtime-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "8.0",
+            "Devel",
+            "CUDNN 6"
+          ],
+          "name": "8.0-cudnn6-devel-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "8.0",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "8.0-cudnn7-devel-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "9.2",
+            "Runtime",
+            "Default"
+          ],
+          "name": "9.2-runtime-ubuntu18.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "9.2",
+            "Devel",
+            "Default"
+          ],
+          "name": "9.2-devel-ubuntu18.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "9.2",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "9.2-cudnn7-runtime-ubuntu18.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "8.0",
+            "Runtime",
+            "CUDNN 5"
+          ],
+          "name": "8.0-cudnn5-runtime-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "8.0",
+            "Devel",
+            "CUDNN 5"
+          ],
+          "name": "8.0-cudnn5-devel-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "9.2",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "9.2-cudnn7-devel-ubuntu18.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 14.04",
+            "10.0",
+            "Base",
+            "Default"
+          ],
+          "name": "10.0-base-ubuntu14.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "10.0",
+            "Devel",
+            "Default"
+          ],
+          "name": "latest"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "10.0",
+            "Runtime",
+            "Default"
+          ],
+          "name": "10.0-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "10.0",
+            "Devel",
+            "Default"
+          ],
+          "name": "10.0-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "10.0",
+            "Base",
+            "Default"
+          ],
+          "name": "10.0-base-ubuntu18.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "10.0",
+            "Base",
+            "Default"
+          ],
+          "name": "10.0-base"
+        },
+        {
+          "tagList": [
+            "Ubuntu 18.04",
+            "9.2",
+            "Base",
+            "Default"
+          ],
+          "name": "9.2-base-ubuntu18.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "10.0",
+            "Runtime",
+            "Default"
+          ],
+          "name": "10.0-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "10.0",
+            "Devel",
+            "Default"
+          ],
+          "name": "10.0-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "10.0",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "10.0-cudnn7-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.2",
+            "Runtime",
+            "Default"
+          ],
+          "name": "9.2-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.2",
+            "Devel",
+            "Default"
+          ],
+          "name": "9.2-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.2",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "9.2-cudnn7-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.2",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "9.2-cudnn7-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.1",
+            "Runtime",
+            "Default"
+          ],
+          "name": "9.1-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.1",
+            "Devel",
+            "Default"
+          ],
+          "name": "9.1-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.1",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "9.1-cudnn7-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.1",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "9.1-cudnn7-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "10.0",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "10.0-cudnn7-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.0",
+            "Runtime",
+            "Default"
+          ],
+          "name": "9.0-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.2",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "9.2-cudnn7-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.0",
+            "Devel",
+            "Default"
+          ],
+          "name": "9.0-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.2",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "9.2-cudnn7-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.0",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "9.0-cudnn7-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.0",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "9.0-cudnn7-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.1",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "9.1-cudnn7-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.1",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "9.1-cudnn7-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.0",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "9.0-cudnn7-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.0",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "9.0-cudnn7-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Runtime",
+            "Default"
+          ],
+          "name": "8.0-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Devel",
+            "Default"
+          ],
+          "name": "8.0-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Runtime",
+            "CUDNN 6"
+          ],
+          "name": "8.0-cudnn6-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Runtime",
+            "CUDNN 6"
+          ],
+          "name": "8.0-cudnn6-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "8.0-cudnn7-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Runtime",
+            "CUDNN 7"
+          ],
+          "name": "8.0-cudnn7-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Devel",
+            "CUDNN 6"
+          ],
+          "name": "8.0-cudnn6-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Devel",
+            "CUDNN 6"
+          ],
+          "name": "8.0-cudnn6-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "8.0-cudnn7-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Devel",
+            "CUDNN 7"
+          ],
+          "name": "8.0-cudnn7-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Runtime",
+            "CUDNN 5"
+          ],
+          "name": "8.0-cudnn5-runtime-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Runtime",
+            "CUDNN 5"
+          ],
+          "name": "8.0-cudnn5-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Devel",
+            "CUDNN 5"
+          ],
+          "name": "8.0-cudnn5-devel-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Devel",
+            "CUDNN 5"
+          ],
+          "name": "8.0-cudnn5-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.2",
+            "Runtime",
+            "Default"
+          ],
+          "name": "9.2-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.2",
+            "Devel",
+            "Default"
+          ],
+          "name": "9.2-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.0",
+            "Runtime",
+            "Default"
+          ],
+          "name": "9.0-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.0",
+            "Devel",
+            "Default"
+          ],
+          "name": "9.0-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.1",
+            "Runtime",
+            "Default"
+          ],
+          "name": "9.1-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.1",
+            "Devel",
+            "Default"
+          ],
+          "name": "9.1-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Runtime",
+            "Default"
+          ],
+          "name": "8.0-runtime"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "8.0",
+            "Devel",
+            "Default"
+          ],
+          "name": "8.0-devel"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.2",
+            "Base",
+            "Default"
+          ],
+          "name": "9.2-base-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.2",
+            "Base",
+            "Default"
+          ],
+          "name": "9.2-base"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.0",
+            "Base",
+            "Default"
+          ],
+          "name": "9.0-base-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.0",
+            "Base",
+            "Default"
+          ],
+          "name": "9.0-base"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "10.0",
+            "Base",
+            "Default"
+          ],
+          "name": "10.0-base-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.1",
+            "Base",
+            "Default"
+          ],
+          "name": "9.1-base-ubuntu16.04"
+        },
+        {
+          "tagList": [
+            "Ubuntu 16.04",
+            "9.1",
+            "Base",
+            "Default"
+          ],
+          "name": "9.1-base"
+        }
+      ]
+    }
+  ]
+}
