@@ -25,7 +25,8 @@ const Content = ({
   const stepType= stepTypeTitle[content.type]
   const stepRunBool = stepType === 'Edit Run Step'
   const stepEnBool =  stepType === 'Edit Entrypoint Step'
-  const {custom} = config.base_docker
+  const {presetBase} = config.base_docker
+  console.log(config.base_docker)
   const sharedProps = {
     delFromDocker,
     addEnStep,
@@ -40,6 +41,7 @@ const Content = ({
     <div className="black mt3 relative">
       <div className="pl4 mb3 h2 flex items-center black">{stepTypeTitle[content.type]}<i className={"f7 ml3 ms-Icon ms-Icon--ChevronRight black-30"} aria-hidden="true" />
          <span>{ stepRunBool ? addRunStep.name : '' || stepEnBool ? addEnStep.name : ''}</span>
+        { stepType === 'Base Docker' ? presetBase ? <span>{presetBase}</span> : 'custom' : ''}
         { stepType === 'Base Docker' ? <Button className='absolute-l right-0-l' onClick={()=> onUpdate({base_docker: {}})}>Delete</Button> : ''}
         { stepRunBool || stepEnBool ? <Button className="absolute-l right-0-l"
            onClick={()=> stepRunBool ? onSwitchContent({ type: 'add_run_step' }):onSwitchContent({ type: 'add_entrypoint_step' })} >
@@ -56,7 +58,6 @@ const Content = ({
             return (
               <AddStep type="entrypoint" {...sharedProps} />
             );
-          // case 'edit_run_step':
           case 'edit_run_step':
             return (
                 <EditStep

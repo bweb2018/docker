@@ -9,7 +9,7 @@ const Button = ({
     ? (
       <span
         className={`pa2 c-st ${className}`}
-        style={{ cursor: 'not-allowed', userSelect: 'none' }}
+        style={{ userSelect: 'none' }}
         {...others}
       >
         {children}

@@ -67,13 +67,11 @@ class Bar extends React.Component {
         this.entrypoint_steps = this.getStep(entrypoint_steps)
        return (
                <Nav
-                   className='ms-Nav-navItem'
-                   aria-hidden="true"
                    selectedKey= { content.type }
                    onLinkClick={this._onLinkClick}
                    styles={{
-                       root: { width: 286, boxSizing: 'border-box' },
-                       link: { height: 60, whiteSpace: 'pre', lineHeight: 18 },
+                       root: { width: 310 },
+                       link: { height: 60, whiteSpace: 'pre', lineHeight: 14 },
                    }}
                    expandButtonAriaLabel="Expand or collapse"
                    groups={[
@@ -85,10 +83,9 @@ class Bar extends React.Component {
                                    icon: config.general.name ? 'Completed': 'warning',
                                },
                                {
-                                   name: 'From '+'\n'+`${config.base_docker.image_url || ''}`,
+                                   name: 'From'+'\n'+`${config.base_docker.image_url || ''}`,
                                    key: 'edit_docker',
                                    icon: config.base_docker.image_url ? 'Completed': 'warning',
-                                   className: 'ms-Button-icon icon'
                                },
                                {
                                    name: 'Run',

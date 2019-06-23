@@ -42,7 +42,7 @@ const ResetButton = ({ onClick, index, id}) => (<Button className="fr" onClick={
     presetBase: to.base,
   };
   }
-      console.log(newBaseDocker)
+
     this.update(newBaseDocker);
   }
 

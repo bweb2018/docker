@@ -158,7 +158,7 @@ class App extends React.Component {
         {/* https://stackoverflow.com/questions/16671914/flexible-box-layout-model-how-should-auto-margins-in-the-cross-axis-direction-b */}
         <div className="flex self-stretch flex-auto">
           <div className="flex flex-auto mw9 center">
-            <div className="w-20 br b--near-white bw1 flex flex-column justify-between pb2">
+            <div className="w-20 ml1 br b--near-white bw1 flex flex-column justify-between pb2">
               <div className="overflow-hidden">
                 {/*<Index*/}
                 {/*    config={config}*/}
