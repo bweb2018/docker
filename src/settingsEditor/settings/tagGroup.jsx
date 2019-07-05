@@ -41,7 +41,6 @@ export default class TagGroup extends React.Component {
   }
 
   onChange(idx, val) {
-    console.log(idx,val)
     const { onUpdate, tags, value } = this.props;
     const previousParts = (value && this.getReverseLookup(tags)[value]) || [];
     const { parts, result } = this.getOrDefaultChosen([...previousParts.slice(0, idx), val]);
@@ -72,17 +71,15 @@ export default class TagGroup extends React.Component {
     const {
       label, value, groupLabels, tags, disabled,
     } = this.props;
-
     const { parts } = this.getOrDefaultChosen((value && this.getReverseLookup(tags)[value]) || []);
     const content = [];
     let cur = this.getTagTree(tags);
     for (let i = 0; i < groupLabels.length; i += 1) {
       content.push(
-        <div className="pt3 pb1 f6">
+        <div className="pt3 pb1 f7" key={i}>
           <ChoiceGroup
-            key={groupLabels[i]}
             label={groupLabels[i]}
-            options={Object.keys(cur).map(x => ({ name: x }))}
+            options={Object.keys(cur).map( x => ({ name: x}))}
             value={parts[i]}
             onUpdate={val => this.onChange(i, val)}
             disabled={disabled}

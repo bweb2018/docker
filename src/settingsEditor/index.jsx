@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import * as models from '../models';
 import ChoiceGroup from './settings/choiceGroup';
-import TextField from './settings/textField';
+import TextFields from './settings/textField';
 import TableEditor from './settings/tableEditor';
 import TagGroup from './settings/tagGroup';
 import validate from './validator';
@@ -29,9 +29,10 @@ export default class SettingsEditor extends React.Component {
       }
       let content = null;
       switch (setting.type) {
+
         case 'text':
           content = (
-            <TextField
+            <TextFields
               label={label}
               value={value[setting.name]}
               onUpdate={val => this.onUpdate(setting.name, val)}
@@ -41,6 +42,7 @@ export default class SettingsEditor extends React.Component {
           );
           break;
         case 'choice':
+          console.log(setting.type)
           content = (
             <ChoiceGroup
               label={label}
@@ -80,11 +82,10 @@ export default class SettingsEditor extends React.Component {
       }
       return (
         <div
-          className={C({ pt3: i > 0, pt1: i === 0 }, 'pt3 pb3 f6 bt b--near-white')}
+          className={'f6 bt b--near-white pv3'}
           key={setting.name}
         >
           {content}
-          <div className='bt b--near-white'></div>
         </div>
       );
     });

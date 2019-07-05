@@ -19,20 +19,22 @@ class ChoiceGroup extends React.Component {
       throw new Error('invalid options');
     }
     if (!value || !options.find(x => x.name === value)) {
+      console.log(options[0].name);
       onUpdate(options[0].name);
     }
   }
 
   render() {
     const {
-      label, options, onUpdate, value, disabled,
+      label, options, onUpdate, value, disabled
     } = this.props;
     return (
       <>
         <div>{label}</div>
         <div className="pt2 pl0">
           {
-            options.map(option => (
+            options.map((option)=> (
+             
               <div
                 key={option.name}
                 className={C({

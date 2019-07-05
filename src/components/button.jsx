@@ -17,7 +17,7 @@ const Button = ({
     )
     : (
       <span
-        className={C('pointer ', className)}
+        className={C('pa2 pl0 pointer ', className)}
         style={{ userSelect: 'none' }}
         onClick={onClick}
         {...others}

@@ -1,3 +1,4 @@
+
 $colors: #455A64 #607D8B #CFD8DC #FFFFFF #9E9E9E #212121 #757575 #BDBDBD;
 $names: 'pd' 'p' 'pl' 't' 'a' 'pt' 'st' 'd';
 // PrimaryDark Primary PrimaryLight Text Accent PrimaryText SecondaryText Divider
@@ -27,4 +28,9 @@ $names: 'pd' 'p' 'pl' 't' 'a' 'pt' 'st' 'd';
 .sticky {
     position: sticky;
     top: 0;
+}
+.n175 { margin-left: -1.75rem; }
+.w-95 { width: 95%; }
+.bg{
+    background: #0078D4
 }

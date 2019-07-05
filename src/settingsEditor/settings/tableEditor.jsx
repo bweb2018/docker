@@ -64,11 +64,10 @@ export default class TableEditor extends React.Component {
             display: 'grid',
             gridTemplateColumns: `repeat(${flatHeaders.length}, auto) min-content`,
           }}
-
-          className="pv2 w-50 mb4"
+          className="mt2 w-50"
         >
           {flatHeaders.map((x => (
-            <div key={`header-${x}`} className="pb2">
+            <div key={`header-${x}`} className="pb2 w-40">
               {x}
             </div>
           )))}
@@ -76,32 +75,35 @@ export default class TableEditor extends React.Component {
           {value.map((row, idx) => (
             // eslint-disable-next-line react/no-array-index-key
             <React.Fragment key={idx}>
-              {flatHeaders.map(col => (
+              {flatHeaders.map(col => {
+                console.log(col)
+                return(
                 <input
                   // eslint-disable-next-line react/no-array-index-key
                   key={col + idx}
-                  className="ph2 pv1 w-90"
+                  style={ col === 'Package' ? {border: 0, outline: 0, backgroundColor: 'white', borderBottom: '2px solid #4EA1E1'}: {} }
+                  className={col === 'Package' ? "ph1 mb3 pv1 w-95 black-50" : "ph1 mb3 pv1 w-90 black-50" }
                   value={row[col] || ''}
                   type="text"
                   onChange={e => this.onChange(idx, col, e.target.value)}
                   disabled={disabled}
                 />
-              ))}
+              )})}
               <Button
                 // eslint-disable-next-line react/no-array-index-key
                 key={idx}
+                className='nl3'
                 onClick={() => this.onRemoveRow(idx)}
                 disabled={disabled}
               >
-                <i className="fa fa-remove" />
+                <i className="ms-Icon ms-Icon--Cancel black-70 f7" />
               </Button>
             </React.Fragment>
           ))}
         </div>
-        <div className="mt1">
-          <Button onClick={() => this.onAddRow()} disabled={disabled}>
-            <i className="fa fa-plus mr1" />
-            <span>Add</span>
+        <div>
+          <Button className='flex' onClick={() => this.onAddRow()} disabled={disabled}>
+            <i className='f3 ms-Icon ms-Icon--CircleAddition mr1' aria-hidden="true"/><span className='mt1'>Add items</span>
           </Button>
         </div>
       </>

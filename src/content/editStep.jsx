@@ -14,7 +14,7 @@ class EditStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editingName: !props.stepToEdit.name,
+      // editingName: !props.stepToEdit.name,
       saving: false,
       saveInfo: { invalid: true },
     };
@@ -22,9 +22,7 @@ class EditStep extends React.Component {
 
   get editingStep() {
     const { stepToEdit, config, type } = this.props;
-    console.log(type)
     const list = config[`${type}_steps`];
-    console.log(list)
     return list.find(item =>  item.id === stepToEdit.id)
   }
 
@@ -87,14 +85,13 @@ class EditStep extends React.Component {
     const { editingStep, state: { editingName, saving, saveInfo } } = this;
     const baseStep = editingStep ? getStep(editingStep.type) : '';
     return (
-        baseStep ? <div className="bg-white pa3 bt b--near-white ml3">
+        baseStep ? <div className="bg-white ml4 pt1 black-80">
         <div className="mt2 fr">
           <Button onClick={this.delete}>
-            <i className="fa fa-trash mr1" />
             Delete
           </Button>
         </div>
-        <div className="f3 mv2">
+        <div className="mv2">
           {
             editingName ? (
               <input
@@ -108,7 +105,7 @@ class EditStep extends React.Component {
               <>
                 <span>{editingStep.name}</span>
                 <i
-                  className="f5 ml2 fa fa-edit hover-black-70 pointer dn"
+                  className="ml2 fa fa-edit hover-black-80 pointer dn"
                   onClick={() => this.setState({ editingName: true })}
                 />
               </>

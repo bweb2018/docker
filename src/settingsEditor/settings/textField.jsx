@@ -1,8 +1,10 @@
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import C from 'classnames';
+import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import { Stack, IStackProps } from 'office-ui-fabric-react/lib/Stack';
 
-export default class TextField extends React.Component {
+export default class TextFields extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,9 +13,9 @@ export default class TextField extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange(e) {
+  onChange(values) {
     const { onUpdate, validate } = this.props;
-    const { value } = e.target;
+    const value = values ? values : ''
     if (validate(value)) {
       this.setState({ invalid: false });
     } else {
@@ -21,30 +23,30 @@ export default class TextField extends React.Component {
     }
     onUpdate(value);
   }
-
+  _inputMessage = (values)=> {
+    this.onChange(values)
+  }
   render() {
     const { invalid } = this.state;
+    const errorMessage = invalid ? 'docker should not be empty' : ''
     const { value, label, disabled } = this.props;
     return (
       <>
-        <div className={C({ red: invalid })}>{label}</div>
+        <div className={C({ red: invalid },'mb3')}>{label}</div>
         {
           !disabled
             ? (
-              <input
-                style={{ border: 0, outline: 0, borderBottom: '1px solid #cdecff' }}
-                className={C({ 'ba b--red': invalid }, 'w-20 ')}
-                value={value}
-                onChange={this.onChange}
-              />
+                <Stack horizontal tokens={{ childrenGap: 50 }} >
+                  {/*<TextField label="Standard:" underlined />*/}
+                  {/*<TextField label="Disabled:" underlined disabled defaultValue="I am disabled" />*/}
+                  <TextField  errorMessage={errorMessage} onGetErrorMessage ={this._inputMessage} value={value}  required placeholder="Enter text here" label="Required:"underlined />
+                </Stack>
             )
             : (
-              <input
-                style={{ border: 0, outline: 0, backgroundColor: 'white', borderBottom: '2px solid #cdecff' }}
-                className='w-20 '
-                disabled
-                value={value}
-              />
+                  <Stack horizontal tokens={{ childrenGap: 50 }} >
+                    {/*<TextField label="Standard:" underlined />*/}
+                    <TextField label="Disabled:" underlined disabled defaultValue={value} />
+                  </Stack>
             )
         }
       </>
@@ -52,7 +54,7 @@ export default class TextField extends React.Component {
   }
 }
 
-TextField.propTypes = {
+TextFields.propTypes = {
   label: PropTypes.node.isRequired,
   value: PropTypes.string,
   onUpdate: PropTypes.func.isRequired,
@@ -60,7 +62,19 @@ TextField.propTypes = {
   validate: PropTypes.func.isRequired,
 };
 
-TextField.defaultProps = {
+TextFields.defaultProps = {
   value: '',
   disabled: false,
 };
+{/*<input*/}
+{/*    style={{ border: 0, outline: 0, borderBottom: '1px solid' }}*/}
+{/*    className={C({ 'bb b-red': invalid }, 'pb1 w-20 nb3-ns black-70')}*/}
+{/*    value={value}*/}
+{/*    onChange={this.onChange}*/}
+{/*/>*/}
+{/*<input*/}
+{/*    style={{ border: 0, outline: 0, backgroundColor: 'white', borderBottom: '2px solid #4EA1E1' }}*/}
+{/*    className='w-20 nb4-ns black-70'*/}
+{/*    disabled*/}
+{/*    value={value}*/}
+{/*/>*/}

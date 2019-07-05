@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\v-hub\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add uifabric
+  C:\Program Files\nodejs\node.exe C:\Users\v-hub\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add pubsub-js
 
 PATH: 
   C:\open pi\dockerfile-generator\node_modules\.bin;C:\Program Files (x86)\Python37-32\Scripts\;C:\Program Files (x86)\Python37-32\;C:\Program Files\Common Files\Microsoft Shared\Microsoft Online Services;C:\Program Files (x86)\Common Files\Microsoft Shared\Microsoft Online Services;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\v-hub\AppData\Local\Yarn\bin;C:\Users\v-hub\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\v-hub\.windows-build-tools\python27\;C:\Users\v-hub\AppData\Local\Temp\yarn--1556608497532-0.8580272256502794;C:\Users\v-hub\AppData\Local\Yarn\Data\global\node_modules\windows-build-tools\node_modules\.bin;C:\Users\v-hub\AppData\Local\Yarn\Data\link\node_modules\.bin;C:\Program Files\libexec\lib\node_modules\npm\bin\node-gyp-bin;C:\Program Files\lib\node_modules\npm\bin\node-gyp-bin;node_modules\npm\bin\node-gyp-bin;C:\Program Files (x86)\Python37-32\Scripts\;C:\Program Files (x86)\Python37-32\;C:\Program Files\Common Files\Microsoft Shared\Microsoft Online Services;C:\Program Files (x86)\Common Files\Microsoft Shared\Microsoft Online Services;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\v-hub\AppData\Local\Yarn\bin;C:\Users\v-hub\AppData\Local\Microsoft\WindowsApps;C:\Users\v-hub\AppData\Roaming\npm;C:\Users\v-hub\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\v-hub\AppData\Roaming\nvm;
@@ -14,17 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.npmjs.org/uifabric: Not found
-      at Request.params.callback [as _callback] (C:\Users\v-hub\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66058:18)
-      at Request.self.callback (C:\Users\v-hub\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:129541:22)
-      at Request.emit (events.js:189:13)
-      at Request.<anonymous> (C:\Users\v-hub\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:130513:10)
-      at Request.emit (events.js:189:13)
-      at IncomingMessage.<anonymous> (C:\Users\v-hub\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:130435:12)
+  Error: https://registry.npmjs.org/office-ui-fabric-react/-/office-ui-fabric-react-6.189.4.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Users\v-hub\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:130168:19)
       at Object.onceWrapper (events.js:277:13)
-      at IncomingMessage.emit (events.js:194:15)
-      at endReadableNT (_stream_readable.js:1125:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+      at ClientRequest.emit (events.js:189:13)
+      at TLSSocket.emitRequestTimeout (_http_client.js:662:40)
+      at Object.onceWrapper (events.js:277:13)
+      at TLSSocket.emit (events.js:189:13)
+      at TLSSocket.Socket._onTimeout (net.js:440:8)
+      at ontimeout (timers.js:436:11)
+      at tryOnTimeout (timers.js:300:5)
+      at listOnTimeout (timers.js:263:5)
 
 npm manifest: 
   {

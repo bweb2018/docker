@@ -42,7 +42,7 @@ class EditDockerfile extends React.Component {
   render() {
     const { content, editing, switchColor } = this.state;
     return (
-      <div className="bg-white pa3 f6 mh3 bt b--near-white">
+      <div className="bg-white pa3 f7 mh3 bt b--near-white">
         <div>Content</div>
         <textarea
           ref={this.textArea}
@@ -53,21 +53,19 @@ class EditDockerfile extends React.Component {
           onChange={this.onChange}
           spellCheck={false}
         />
-        <div className="mt2">
-          <div>
-            <Button className="mr2 pa1 ph3 bg-black-05" onClick={this.onCopy}>
+          <div  className="mt2">
+            <Button className="fl tc mr2 pa1 ph3 bg-black-10 w2" onClick={this.onCopy}>
               <span className='black'>Copy</span>
             </Button>
             {/*{!editing && (*/}
-              <Button className="mr2 pa1 ph3 bg-black-05" onClick={this.onEdit}>
-                 <span className='black'>Edit</span>
+              <Button className="fl tc mr2 pa1 ph3 bg w2" onClick={this.onEdit}>
+                 <span className='white'>Edit</span>
               </Button>
             {/*)}*/}
-            <Button className="mr2 pa1 ph3 bg-black-05" onClick={this.onSave}>
-              Save
+            <Button className="fl tc mr2 pa1 ph3 bg-black-10 w2" onClick={this.onSave}>
+              <span className='black'>Save</span>
             </Button>
           </div>
-        </div>
       </div>
     );
   }

@@ -9,9 +9,7 @@ import gelato from './gelato/lib/index';
 import './main.scss';
 import Title from './title';
 import Content from './content';
-import Pipeline from './pipeline/pipeline';
-import Index from './sider/index.jsx';
-import Bar from './bar/bar';
+import Sidebar from './sidebar/sidebar';
 import { validateConfig, configPreSave } from './config-utils';
 import Button from './components/button';
 
@@ -46,12 +44,14 @@ class App extends React.Component {
       addRunStep: null,
       addEnStep: null,
       savedSteps: [],
+      baseDockers: ''
     };
     this.onUpdate = this.onUpdate.bind(this);
     this.onSwitchContent = this.onSwitchContent.bind(this);
     this.onReset = this.onReset.bind(this);
     this.addSteps = this.addSteps.bind(this);
     this.delFromDocker = this.delFromDocker.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   async componentDidMount() {
@@ -80,13 +80,19 @@ class App extends React.Component {
       },
     });
   }
-  addSteps(step,run) {
-      run ? this.setState({
-        addRunStep: step
-      }) : this.setState({
-        addEnStep: step
-      })
-
+  addSteps(step,type) {
+    console.log(step)
+    switch (type) {
+      case 'run':
+        this.setState({addRunStep: step})
+            break;
+      case 'entrypoint':
+        this.setState({addEnStep: step})
+            break;
+      case 'baseDockers':
+        this.setState({baseDockers: step})
+      default:
+    }
 
   }
   onUpdate(update, onclick) {
@@ -143,9 +149,43 @@ class App extends React.Component {
   componentDidCatch(error) {
     Alert.error(error.toString(), { position: 'bottom-right' });
   }
+  onClick () {
+    const { config, content, addRunStep, addEnStep, baseDockers } = this.state;
+    try {
+      if(!baseDockers) {Alert.error('baseDockers should not be empty')
+        return}
+      this.onSwitchContent({
+        type: 'edit_dockerfile',
+        text: gelato(configPreSave(config)),
+      });
+    } catch (ex) {
+      Alert.error(`An error occured while generating Dockerfile: ${ex}`, { position: 'bottom-right' });
+    }
+  }
 
+  addIcon = ({type,bl,name,z,color,pos,lef,top})=> {
+    const buttons = document.querySelectorAll('ul li')
+    const diva = buttons[bl]
+    const i = document.createElement('i')
+    i.className = `ms-Icon ms-Icon--${name}`
+    i.style.zIndex = z
+    i.style.color = color
+    i.style.position= pos
+    // i.style.left= lef
+    i.style.float= 'left'
+    i.style.left = lef
+    i.style.top= top
+    if (type) {
+      if(diva.querySelectorAll('i')[1]) return
+      diva.appendChild(i)
+    }else{
+      diva.removeChild(diva.querySelectorAll('i')[1])
+    }
+    
+}
   render() {
-    const { config, content, invalid, addRunStep, addEnStep } = this.state;
+    const { config, content, addRunStep, addEnStep, baseDockers } = this.state;
+    const docker = baseDockers? baseDockers: ''
     return (
       <div className="helvetica flex flex-column vh-100">
         {/*<Title*/}
@@ -158,63 +198,46 @@ class App extends React.Component {
         {/* https://stackoverflow.com/questions/16671914/flexible-box-layout-model-how-should-auto-margins-in-the-cross-axis-direction-b */}
         <div className="flex self-stretch flex-auto">
           <div className="flex flex-auto mw9 center">
-            <div className="w-20 ml1 br b--near-white bw1 flex flex-column justify-between pb2">
-              <div className="overflow-hidden">
-                {/*<Index*/}
-                {/*    config={config}*/}
-                {/*    content={content}*/}
-                {/*    onUpdate={this.onUpdate}*/}
-                {/*    onSwitchContent={this.onSwitchContent}*/}
-                {/*/>*/}
-                <Bar
+              <div className="w-20 ml1 border-box br b--near-white bw1 flex flex-column justify-between">
+                <div className="overflow-hidden">
+                  <Sidebar
+                      baseDockers={docker}
+                      addSteps={this.addSteps}
+                      config={config}
+                      content={content}
+                      onUpdate={this.onUpdate}
+                      onSwitchContent={this.onSwitchContent}
+                  />
+                </div>
+                <div style={{ flexGrow: 0}}>
+                  <Button
+                      className= {config.invalid ? "f7 db w-60 bg-black-10 mid-gray  mb5 c-t tc center": "f7 db w-60 bg mid-gray  mb5 c-t tc center"}
+                      disabled={config.invalid}
+                      dark
+                      onClick={this.onClick}
+                  >
+                    Generate Dockerfile
+                  </Button>
+                </div>
+              </div>
+              <div className="w-70 pb4 mh2 overflow-y-auto border-box">
+                <Content
+                    addIcon={this.addIcon}
+                    baseDockers={baseDockers}
                     addSteps={this.addSteps}
-                    config={config}
+                    delFromDocker={this.delFromDocker}
+                    addEnStep={addEnStep}
+                    addRunStep={addRunStep}
                     content={content}
+                    config={config}
                     onUpdate={this.onUpdate}
                     onSwitchContent={this.onSwitchContent}
                 />
-                {/*<Pipeline*/}
-                {/*    config={config}*/}
-                {/*    content={content}*/}
-                {/*    onUpdate={this.onUpdate}*/}
-                {/*    onSwitchContent={this.onSwitchContent}*/}
-                {/*/>*/}
               </div>
-              <div style={{ flexGrow: 0 }}>
-                <Button
-                    className= {config.invalid ? "db w-60 bg-black-10 mid-gray  mb5 c-t tc center": "db w-60 bg-blue mid-gray  mb5 c-t tc center"}
-                    disabled={config.invalid}
-                    dark
-                    onClick={() => {
-                      try {
-                        this.onSwitchContent({
-                          type: 'edit_dockerfile',
-                          text: gelato(configPreSave(config)),
-                        });
-                      } catch (ex) {
-                        Alert.error(`An error occured while generating Dockerfile: ${ex}`, { position: 'bottom-right' });
-                      }
-                    }}
-                >
-                  Generate Dockerfile
-                </Button>
-              </div>
-            </div>
-            <div className="w-70 pb4 mh2 overflow-y-auto ">
-              <Content
-                delFromDocker={this.delFromDocker}
-                addEnStep={addEnStep}
-                addRunStep={addRunStep}
-                content={content}
-                config={config}
-                onUpdate={this.onUpdate}
-                onSwitchContent={this.onSwitchContent}
-              />
             </div>
           </div>
+          <Alert stack={{ limit: 3 }} />
         </div>
-        <Alert stack={{ limit: 3 }} />
-      </div>
     );
   }
 }

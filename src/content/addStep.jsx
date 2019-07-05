@@ -49,7 +49,7 @@ class AddStep extends React.Component {
     const { content, config, type, onUpdate, onSwitchContent} = this.props;
     const { selectedCard } = this.state;
     return (
-        <ul className={'list pl4'}>
+        <ul className={'list pl4 f6 black-80'}>
       {filteredSteps.map((item, index) => <li className={'cb pv3 bt b--near-white '} key={index}><span className={'pointer h3 mv7 '}  onClick={(e) => {
         e.stopPropagation();
         const stepListName = `${type}_steps`;
@@ -101,8 +101,10 @@ class AddStep extends React.Component {
 
   render() {
 
-    const { config, type, content} = this.props;
-    const filteredSteps = filterSteps(type, config.base_docker.os);
+    const { config, baseDockers, type, content} = this.props;
+    console.log(config, baseDockers, type);
+    const filteredSteps = filterSteps(type, baseDockers.os);
+    console.log(filteredSteps);
     return (
       <div>
         {this.renderBaseStepList(filteredSteps)}
