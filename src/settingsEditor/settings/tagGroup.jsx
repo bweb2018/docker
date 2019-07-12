@@ -69,7 +69,7 @@ export default class TagGroup extends React.Component {
 
   render() {
     const {
-      label, value, groupLabels, tags, disabled,
+      label, value, groupLabels, tags, disabled, baseDockers, isAdd, putAdd
     } = this.props;
     const { parts } = this.getOrDefaultChosen((value && this.getReverseLookup(tags)[value]) || []);
     const content = [];
@@ -78,6 +78,9 @@ export default class TagGroup extends React.Component {
       content.push(
         <div className="pt3 pb1 f7" key={i}>
           <ChoiceGroup
+            isAdd={isAdd}
+            putAdd={putAdd}
+            baseDockers={baseDockers}
             label={groupLabels[i]}
             options={Object.keys(cur).map( x => ({ name: x}))}
             value={parts[i]}

@@ -6,12 +6,11 @@
   position: relative;
   left: 220px;
 }
-
 .ms-FocusZone i[data-icon-name='Completed']{
   color: green;
 }
 .ms-FocusZone i[data-icon-name='warning']{
-  color: red;
+  color:#D13438;
 }
 .ms-FocusZone i[data-icon-name="StatusCircleCheckmark"]{
   z-index: 30;
@@ -19,7 +18,6 @@
   top: -5px;
   color: white
 }
-
 .ms-FocusZone li:nth-child(1) div[name='General
 ']{
   background: #FED9CC !important;
@@ -28,13 +26,9 @@
 ']{
   background: #FED9CC !important;
 }
-
 .ms-Nav-navItem:hover i[data-icon-name="StatusCircleCheckmark"]{
   color: white
 }
-// .ms-Nav-navItem .ms-Button-flexContainer:hover>i[data-icon-name='Completed']{
-//   color: green;
-// }
 .ms-Nav-navItem .ms-Button-flexContainer:hover>i[data-icon-name='warning']{
   color: red;
 }
@@ -42,9 +36,9 @@
   color: #333 !important;
   font-family: "semibold", helvetica, sans-serif;
 }
-
 button[aria-label="Run"],button[aria-label="Entrypoint"]{
   display: none;
 }
-
-
+.ml-1{
+  margin-left: -10px
+}

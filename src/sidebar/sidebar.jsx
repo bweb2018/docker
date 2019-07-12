@@ -25,8 +25,7 @@ class Bar extends React.Component {
     }
 
     _onLinkClick = (item,k) =>{
-        console.log(item.currentTarget)
-        const { config:{run_steps, entrypoint_steps}, onSwitchContent, addSteps } = this.props
+        const { runSteps, enSteps, onSwitchContent, config } = this.props
         let {key} = k;
         const  keyType = typeof k.key;
         switch ( keyType === 'string') {
@@ -45,8 +44,8 @@ class Bar extends React.Component {
         }
         let n
         let i
-        const entrypointNewItems = cloneDeep(entrypoint_steps)
-        const runNewItems = cloneDeep(run_steps)
+        const entrypointNewItems = cloneDeep(enSteps)
+        const runNewItems = cloneDeep(runSteps)
         const idx = runNewItems.findIndex(ni => {
             n = ni.id
             return ni.id === k.key
@@ -55,14 +54,17 @@ class Bar extends React.Component {
             i = ni.id
             return ni.id === k.key
         });
-        // run_steps.splice(idx, 1);
+        // config.run_steps.splice(idx, 1);
+        // config.entrypoint_steps.splice(idx, 1);
         // onUpdate(entrypointNewItems);
         if(n === k.key){
-            addSteps(runNewItems[idx],'run')
-            onSwitchContent({ type: 'edit_run_step', stepToEdit: run_steps[idx] })
+            // console.log(runNewItems[idx])
+            // addSteps(runNewItems[idx],'run')
+            onSwitchContent({ type: 'edit_run_step', stepToEdit: runSteps[idx] })
         }else if(i === k.key){
-            addSteps(entrypoint_steps[id],'entrypoint')
-            onSwitchContent({ type: 'edit_entrypoint_step', stepToEdit:  entrypoint_steps[id] })
+          
+            // addSteps(entrypoint_steps[id],'entrypoint')
+            onSwitchContent({ type: 'edit_entrypoint_step', stepToEdit:  enSteps[id] })
         }
     }
     getStep = (steps) =>{
@@ -72,10 +74,9 @@ class Bar extends React.Component {
     }
     
     render (){
-      const { addBool } = this.state
-        const { content, config, config:{ run_steps, entrypoint_steps }, baseDockers } = this.props
-        this.run_steps =  this.getStep(run_steps)
-        this.entrypoint_steps = this.getStep(entrypoint_steps)
+        const { content, config,  baseDockers, runSteps, enSteps } = this.props
+        this.run_steps =  this.getStep(runSteps)
+        this.entrypoint_steps = this.getStep(enSteps)
         let docker = baseDockers ? baseDockers.image_url: ''
         return (
             <div>
@@ -85,7 +86,7 @@ class Bar extends React.Component {
                 styles={{
                     chevronIcon: {color: yellow},
                     root: { width: 290 },
-                    link: { height: 52, whiteSpace: 'pre', lineHeight: 14 }
+                    link: { height: 52, whiteSpace: 'pre', lineHeight: 10 }
                 }}
                 groups={[
                     {
@@ -93,10 +94,9 @@ class Bar extends React.Component {
                             {
                                 name: 'General'+'\n'+`${config.general.name || ''}`,
                                 key: 'edit_general',
-                                icon: config.general.name ? 'CircleFill': 'warning',
+                                icon: config.general.name ? `StatusCircleCheckmark` : 'warning',
                                 
                             },
-                           
                             {
                                 name: 'From'+'\n'+`${docker}`,
                                 key: 'edit_docker',

@@ -2,6 +2,7 @@ import C from 'classnames';
 import { cloneDeep } from 'lodash';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
+import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
 
 import * as models from '../../models';
 import Button from '../../components/button';
@@ -44,11 +45,11 @@ export default class TableEditor extends React.Component {
     }
     onUpdate(newVal);
   }
-
+  
   render() {
     const { invalid } = this.state;
     const {
-      label, value, headers, disabled,
+      label, value, headers, disabled, t
     } = this.props;
     const flatHeaders = headers.map(x => (
       typeof x === 'object' ? x.name : x
@@ -67,7 +68,7 @@ export default class TableEditor extends React.Component {
           className="mt2 w-50"
         >
           {flatHeaders.map((x => (
-            <div key={`header-${x}`} className="pb2 w-40">
+            <div key={`header-${x}`} className="pb2">
               {x}
             </div>
           )))}
@@ -76,23 +77,36 @@ export default class TableEditor extends React.Component {
             // eslint-disable-next-line react/no-array-index-key
             <React.Fragment key={idx}>
               {flatHeaders.map(col => {
-                console.log(col)
                 return(
-                <input
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={col + idx}
-                  style={ col === 'Package' ? {border: 0, outline: 0, backgroundColor: 'white', borderBottom: '2px solid #4EA1E1'}: {} }
-                  className={col === 'Package' ? "ph1 mb3 pv1 w-95 black-50" : "ph1 mb3 pv1 w-90 black-50" }
-                  value={row[col] || ''}
-                  type="text"
-                  onChange={e => this.onChange(idx, col, e.target.value)}
-                  disabled={disabled}
-                />
+                  <div key={col + idx}>
+                    <TextField
+                      key={col + idx}
+                      autoComplete='off'
+                      value={row[col] || ''}
+                      className={col === 'Package' ? "mb3 w-95" : "mb3 w-90"}
+                      type="text"
+                      onChange={e => this.onChange(idx, col, e.target.value)}
+                      disabled={disabled}
+                      label="" 
+                      placeholder="Please enter text here" 
+                    />
+                    <div className='w-90 h-10 white'>&nbsp</div>
+                </div>
+                // <input
+                //   // eslint-disable-next-line react/no-array-index-key
+                //   key={col + idx}
+                //   style={ col === 'Package' ? {border: 0, outline: 0, backgroundColor: 'white', borderBottom: '2px solid #4EA1E1'}: {} }
+                //   className={col === 'Package' ? "ph1 mb3 pv1 w-95 black-50" : "ph1 mb3 pv1 w-90 black-50" }
+                //   value={row[col] || ''}
+                //   type="text"
+                //   onChange={e => this.onChange(idx, col, e.target.value)}
+                //   disabled={disabled}
+                // />
               )})}
               <Button
                 // eslint-disable-next-line react/no-array-index-key
                 key={idx}
-                className='nl3'
+                className='ml-1'
                 onClick={() => this.onRemoveRow(idx)}
                 disabled={disabled}
               >
@@ -101,9 +115,9 @@ export default class TableEditor extends React.Component {
             </React.Fragment>
           ))}
         </div>
-        <div>
+        <div className={C({'dn':t ==="add_run_step" || t === "add_entrypoint_step"},'w-10')}>
           <Button className='flex' onClick={() => this.onAddRow()} disabled={disabled}>
-            <i className='f3 ms-Icon ms-Icon--CircleAddition mr1' aria-hidden="true"/><span className='mt1'>Add items</span>
+            <i className='f4 ms-Icon ms-Icon--CircleAddition mr1' aria-hidden="true"/><span className='mt1'>Add items</span>
           </Button>
         </div>
       </>

@@ -12,8 +12,7 @@ import Content from './content';
 import Sidebar from './sidebar/sidebar';
 import { validateConfig, configPreSave } from './config-utils';
 import Button from './components/button';
-
-
+import  * as iconParameter from  './sidebar/iconParameter'
 
 const dummyConfig = {
   version: '1',
@@ -41,16 +40,15 @@ class App extends React.Component {
       content: {
         type: 'edit_general',
       },
-      addRunStep: null,
-      addEnStep: null,
       savedSteps: [],
-      baseDockers: ''
+      baseDockers: '',
+      runSteps: [],
+      enSteps: []
     };
     this.onUpdate = this.onUpdate.bind(this);
     this.onSwitchContent = this.onSwitchContent.bind(this);
     this.onReset = this.onReset.bind(this);
     this.addSteps = this.addSteps.bind(this);
-    this.delFromDocker = this.delFromDocker.bind(this);
     this.onClick = this.onClick.bind(this);
   }
 
@@ -64,14 +62,20 @@ class App extends React.Component {
         Alert.warning('Failed to load last state.');
       }
     }
+    
   }
-  delFromDocker () {
-
-  }
+  
   componentDidUpdate() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.state));
+    const {baseDockers,config} = this.state
+    if(baseDockers)  this.addIcon({on: 'docker', type: 'from', iconParameter})
+    if(!config.general.invalid){
+      this.addIcon( {on:'docker', type:'general',iconParameter} );
+    }else{
+      this.addIcon({type:'general', iconParameter});
+    }
   }
-
+  
   onReset() {
     this.setState({
       config: cloneDeep(dummyConfig),
@@ -81,22 +85,27 @@ class App extends React.Component {
     });
   }
   addSteps(step,type) {
-    console.log(step)
+    const { runSteps, enSteps, baseDockers } = this.state
     switch (type) {
+      case 'add_run_step':
+        runSteps.push(step)
+            break;
       case 'run':
-        this.setState({addRunStep: step})
+        this.setState({runSteps: step})
+            break;
+      case 'en':
+          enSteps.push(step)
             break;
       case 'entrypoint':
-        this.setState({addEnStep: step})
-            break;
+          this.setState({enSteps: step})
+          break;
       case 'baseDockers':
         this.setState({baseDockers: step})
       default:
     }
-
+    
   }
   onUpdate(update, onclick) {
-    console.log(update)
     const { config, content } = this.state;
     const newConfig = validateConfig({ ...cloneDeep(config), ...update });
     if (content.type === 'edit_run_step') {
@@ -150,8 +159,12 @@ class App extends React.Component {
     Alert.error(error.toString(), { position: 'bottom-right' });
   }
   onClick () {
-    const { config, content, addRunStep, addEnStep, baseDockers } = this.state;
+    const { config, baseDockers, content } = this.state;
     try {
+      if(content.type === 'add_run_step' || content.type === 'add_entrypoint_step' ) {
+        if(config.run_steps.findIndex((step)=> step.type === 'conda_install') >= 0) config.run_steps.shift()
+        if(config.entrypoint_steps.findIndex((step)=> step.type === 'conda_install') >= 0) config.entrypoint_steps.shift()
+      }
       if(!baseDockers) {Alert.error('baseDockers should not be empty')
         return}
       this.onSwitchContent({
@@ -160,32 +173,38 @@ class App extends React.Component {
       });
     } catch (ex) {
       Alert.error(`An error occured while generating Dockerfile: ${ex}`, { position: 'bottom-right' });
+      
     }
   }
 
-  addIcon = ({type,bl,name,z,color,pos,lef,top})=> {
+  addIcon = ({on,type,iconParameter})=> {
+    if(type === 'from'){
+      type = iconParameter.from
+    }else if(type === 'general'){
+      type = iconParameter.general
+    }
     const buttons = document.querySelectorAll('ul li')
-    const diva = buttons[bl]
+    const diva = buttons[type.bl].querySelector('div button')
     const i = document.createElement('i')
-    i.className = `ms-Icon ms-Icon--${name}`
-    i.style.zIndex = z
-    i.style.color = color
-    i.style.position= pos
-    // i.style.left= lef
+    i.className = `ms-Icon ms-Icon--${type.name}`
+    i.style.zIndex = type.z
+    i.style.color = type.color
+    i.style.left= type.lef
     i.style.float= 'left'
-    i.style.left = lef
-    i.style.top= top
-    if (type) {
+    i.style.top= type.top
+    if (on) {
       if(diva.querySelectorAll('i')[1]) return
       diva.appendChild(i)
     }else{
+      if(!diva.querySelectorAll('i')[1]) return
       diva.removeChild(diva.querySelectorAll('i')[1])
     }
-    
-}
+  }
+
   render() {
-    const { config, content, addRunStep, addEnStep, baseDockers } = this.state;
+    const { config, content, baseDockers, runSteps, enSteps } = this.state;
     const docker = baseDockers? baseDockers: ''
+    console.log(baseDockers);
     return (
       <div className="helvetica flex flex-column vh-100">
         {/*<Title*/}
@@ -205,14 +224,16 @@ class App extends React.Component {
                       addSteps={this.addSteps}
                       config={config}
                       content={content}
+                      runSteps={runSteps}
+                      enSteps={enSteps}
                       onUpdate={this.onUpdate}
                       onSwitchContent={this.onSwitchContent}
                   />
                 </div>
                 <div style={{ flexGrow: 0}}>
                   <Button
-                      className= {config.invalid ? "f7 db w-60 bg-black-10 mid-gray  mb5 c-t tc center": "f7 db w-60 bg mid-gray  mb5 c-t tc center"}
-                      disabled={config.invalid}
+                      className= {config.invalid && !docker.image_url ? "f7 db w-60 bg-black-10 mid-gray  mb5 c-t tc center": "f7 db w-60 bg mid-gray  mb5 c-t tc center"}
+                      disabled={config.invalid && !docker.image_url}
                       dark
                       onClick={this.onClick}
                   >
@@ -223,11 +244,11 @@ class App extends React.Component {
               <div className="w-70 pb4 mh2 overflow-y-auto border-box">
                 <Content
                     addIcon={this.addIcon}
-                    baseDockers={baseDockers}
+                    baseDockers={docker}
                     addSteps={this.addSteps}
                     delFromDocker={this.delFromDocker}
-                    addEnStep={addEnStep}
-                    addRunStep={addRunStep}
+                    enSteps={enSteps}
+                    runSteps={runSteps}
                     content={content}
                     config={config}
                     onUpdate={this.onUpdate}

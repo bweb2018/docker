@@ -14,14 +14,11 @@ const commands = [
 
 function buildConfig (config) {
   schemaValidator(config)
-
   const result = ['']
-
   for (const builder of commands) {
     result.push(...builder.build(config))
     result.push('')
   }
-
   return result.join('\n')
 }
 

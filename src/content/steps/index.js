@@ -19,8 +19,6 @@ export const availableSteps = [
 ];
 
 export function filterSteps(command, os) {
-  console.log(command ,os)
-  console.log(availableSteps)
   return availableSteps.filter(s => s.command.includes(command) && s.os.includes(os));
 }
 

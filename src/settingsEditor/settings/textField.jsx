@@ -17,36 +17,43 @@ export default class TextFields extends React.Component {
     const { onUpdate, validate } = this.props;
     const value = values ? values : ''
     if (validate(value)) {
+      console.log(value)
       this.setState({ invalid: false });
     } else {
       this.setState({ invalid: true });
     }
+    console.log(value)
     onUpdate(value);
   }
-  _inputMessage = (values)=> {
-    this.onChange(values)
+  _inputMessage = (e)=> {
+    const value = e.target.value
+    this.onChange(value)
   }
   render() {
     const { invalid } = this.state;
     const errorMessage = invalid ? 'docker should not be empty' : ''
-    const { value, label, disabled } = this.props;
+    const { value, label, disabled, t } = this.props;
     return (
       <>
-        <div className={C({ red: invalid },'mb3')}>{label}</div>
+        <div className={C({ red: invalid})} className={t ==='add_run_step' || t === 'add_entrypoint_step' ? 'mb0':'mb3'}>{label}</div>
         {
-          !disabled
+          !disabled 
             ? (
-                <Stack horizontal tokens={{ childrenGap: 50 }} >
-                  {/*<TextField label="Standard:" underlined />*/}
-                  {/*<TextField label="Disabled:" underlined disabled defaultValue="I am disabled" />*/}
-                  <TextField  errorMessage={errorMessage} onGetErrorMessage ={this._inputMessage} value={value}  required placeholder="Enter text here" label="Required:"underlined />
+                <Stack horizontal tokens={{ childrenGap: 50 }}  >
+                  <TextField className={C({'dn':t==='add_run_step' || t=== 'add_entrypoint_step'})} 
+                    errorMessage={errorMessage} 
+                    onChange ={this._inputMessage} 
+                    defaultValue={value}  
+                    required placeholder="Enter text here" 
+                    label="Required:"
+                    underlined 
+                  />
                 </Stack>
             )
             : (
-                  <Stack horizontal tokens={{ childrenGap: 50 }} >
-                    {/*<TextField label="Standard:" underlined />*/}
-                    <TextField label="Disabled:" underlined disabled defaultValue={value} />
-                  </Stack>
+                <Stack horizontal tokens={{ childrenGap: 50 }} >
+                  <TextField label="Disabled:" underlined disabled defaultValue={value} />
+                </Stack>
             )
         }
       </>

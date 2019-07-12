@@ -2,6 +2,7 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { cloneDeep } from 'lodash';
 import C from 'classnames';
+import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react'
 
 import * as Models from '../models';
 import Button from '../components/button';
@@ -14,16 +15,17 @@ class EditStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // editingName: !props.stepToEdit.name,
+      editingName: props.stepToEdit?!props.stepToEdit.name:'',
       saving: false,
       saveInfo: { invalid: true },
     };
   }
 
   get editingStep() {
+    
     const { stepToEdit, config, type } = this.props;
     const list = config[`${type}_steps`];
-    return list.find(item =>  item.id === stepToEdit.id)
+    return stepToEdit?stepToEdit || list.find(item =>  item.id === stepToEdit.id) :''
   }
 
   onNameChange = (e) => {
@@ -40,30 +42,49 @@ class EditStep extends React.Component {
     newSaveInfo.invalid = !validate(Settings.saveStep, newSaveInfo);
     this.setState({ saveInfo: newSaveInfo });
   }
-
-
+  
   onLeaveSavingMode = () => {
     this.setState({ saving: false });
   }
-
-  delete = () => {
+  
+  isDelStep = (steps)=> {
     const {
-      onUpdate, config, type, stepToEdit, onSwitchContent,
+      type, onSwitchContent, addSteps, content, runSteps, enSteps
     } = this.props;
-
-    const stepListName = `${type}_steps`;
-    const newStepList = cloneDeep(config[stepListName]);
-    const idx = newStepList.findIndex(item => item.id === stepToEdit.id);
-    newStepList.splice(idx, 1);
-    onUpdate({ [stepListName]: newStepList });
-
-    if (!newStepList.length) {
-      onSwitchContent({ type: 'edit_general' });
-    } else if (idx === newStepList.length) {
-      onSwitchContent({ type: `edit_${type}_step`, stepToEdit: newStepList[idx - 1] });
-    } else {
-      onSwitchContent({ type: `edit_${type}_step`, stepToEdit: newStepList[idx] });
+    
+    const newStepList = cloneDeep(steps);
+    const idx = steps.findIndex((item,index) => item.id === newStepList[index].id);
+    steps.splice(idx, 1);
+    if(!runSteps.length&&!enSteps.length){
+      onSwitchContent({type: 'edit_general'})
+    }else if (idx === steps.length) {
+      onSwitchContent({ type: content.type, stepToEdit: steps[idx - 1] });
+    } else{
+      onSwitchContent({ type: content.type, stepToEdit: steps[idx] });
     }
+    addSteps(steps,type)
+  }
+
+  delete = (e) => {
+    e.stopPropagation()
+    const {
+      type, runSteps, enSteps
+    } = this.props;
+    if(type === 'run'){
+      if(!runSteps) return
+      this.isDelStep(runSteps)
+    }else if(type === 'entrypoint'){
+      if(!enSteps) return
+      this.isDelStep(enSteps)
+    }
+   
+    // onUpdate({ [stepListName]: newStepList });
+    // if(runSteps && !runSteps.length){
+    //   onSwitchContent({type: "add_run_step"})
+    // }else if(enSteps && !enSteps.length){
+    //   onSwitchContent({type: "add_entrypoint_step"})
+    // }
+    
   }
 
   save = () => {
@@ -83,9 +104,10 @@ class EditStep extends React.Component {
 
   render() {
     const { editingStep, state: { editingName, saving, saveInfo } } = this;
+    const { onSddSteps, content } = this.props
     const baseStep = editingStep ? getStep(editingStep.type) : '';
     return (
-        baseStep ? <div className="bg-white ml4 pt1 black-80">
+        baseStep ? <div className={C({'ml4':content.type === 'edit_run_step' || content.type === 'edit_entrypoint_step'},"f7 bg-white pt1 black-80")}>
         <div className="mt2 fr">
           <Button onClick={this.delete}>
             Delete
@@ -115,7 +137,7 @@ class EditStep extends React.Component {
         {baseStep.name !== editingStep.name && (
           <div className="c-st mv2">(Base step: {baseStep.name})</div>
         )}
-        {saving && (
+        {/* {saving && (
           <>
             <SettingsEditor
               settings={Settings.saveStep}
@@ -138,13 +160,22 @@ class EditStep extends React.Component {
             </div>
             <hr />
           </>
-        )}
-        <SettingsEditor
+        )} */}
+       {<SettingsEditor
           settings={getStepSettings(editingStep.type)}
-          onUpdate={this.onConfigChange}
-          value={editingStep.config}
+          onUpdate={content.type ==="edit_entrypoint_step" || content.type === "edit_run_step"?this.onConfigChange:(()=>{})}
+          content={content}
+          value={editingStep.config||''}
           disabled={saving}
-        />
+        />}
+        {
+          content.type ==="add_entrypoint_step" || content.type === "add_run_step" ? 
+          <PrimaryButton
+            text='Add'
+            onClick={onSddSteps}
+            allowDisabledFocus={true}/> 
+          :''
+        }
     </div> : <div></div>
     );
   }

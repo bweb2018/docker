@@ -20,7 +20,7 @@ export default class EditGeneral extends React.Component {
   render() {
     const { config } = this.props;
     return (
-      <div className="ph4 bg-white pa3 pt0 f6">
+      <div className="ph4 bg-white pa3 pt0 f7">
         <SettingsEditor
           settings={Settings.general}
           value={config.general}

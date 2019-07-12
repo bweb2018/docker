@@ -11,14 +11,19 @@ import validate from './validator';
 
 export default class SettingsEditor extends React.Component {
   onUpdate(key, value) {
+    
     const { onUpdate } = this.props;
     const res = {};
+    
     res[key] = value;
-    onUpdate(res);
+    if(!onUpdate) return 
+    onUpdate(res)
   }
 
   render() {
-    const { settings, value, disabled } = this.props;
+    const { settings, value, disabled, content, baseDockers, isAdd, putAdd } = this.props;
+    
+    const t = content? content.type:''
     return settings.map((setting, i) => {
       let { label } = setting;
       if (!label) {
@@ -27,12 +32,13 @@ export default class SettingsEditor extends React.Component {
       if (setting.condition && value[setting.condition.name] !== setting.condition.equals) {
         return null;
       }
-      let content = null;
+      let contents = null;
       switch (setting.type) {
-
+        
         case 'text':
-          content = (
+          contents = (
             <TextFields
+              t={t}
               label={label}
               value={value[setting.name]}
               onUpdate={val => this.onUpdate(setting.name, val)}
@@ -42,8 +48,9 @@ export default class SettingsEditor extends React.Component {
           );
           break;
         case 'choice':
-          console.log(setting.type)
-          content = (
+            console.log('choice')
+           
+          contents = (
             <ChoiceGroup
               label={label}
               value={value[setting.name]}
@@ -54,9 +61,11 @@ export default class SettingsEditor extends React.Component {
           );
           break;
         case 'table':
-          content = (
+            console.log('table')
+          contents = (
             <TableEditor
               label={label}
+              t={t}
               value={value[setting.name]}
               onUpdate={val => this.onUpdate(setting.name, val)}
               validate={val => validate(setting, val)}
@@ -66,9 +75,12 @@ export default class SettingsEditor extends React.Component {
           );
           break;
         case 'tag-group':
-          content = (
+          contents = (
             <TagGroup
+              isAdd={isAdd}
+              putAdd={putAdd}
               label={label}
+              baseDockers={baseDockers}
               value={value[setting.name]}
               onUpdate={val => this.onUpdate(setting.name, val)}
               groupLabels={setting.groupLabels}
@@ -82,10 +94,10 @@ export default class SettingsEditor extends React.Component {
       }
       return (
         <div
-          className={'f6 bt b--near-white pv3'}
+          className={C({'bt':t === 'edit_entrypoint_step' || t === 'edit_run_step'},'f7 b--near-white pv2')}
           key={setting.name}
         >
-          {content}
+          {contents}
         </div>
       );
     });
