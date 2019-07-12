@@ -1,0 +1,12 @@
+{
+  "name": "Install Git",
+  "type": "install_git",
+  "command": [
+    "run"
+  ],
+  "config": [],
+  "os": [
+    "ubuntu",
+    "debian"
+  ]
+}

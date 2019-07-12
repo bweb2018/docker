@@ -1,0 +1,32 @@
+{
+  "name": "Git Clone",
+  "type": "git_clone",
+  "command": [
+    "run",
+    "entrypoint"
+  ],
+  "config": [
+    {
+      "label": "URL of Git Repository",
+      "name": "url",
+      "type": "text",
+      "regex": "\\/([\\w.@:-~_]+?)(\\/)?(\\.git)?$",
+      "required": true
+    },
+    {
+      "label": "Branch",
+      "name": "branch",
+      "type": "text",
+      "required": true
+    },
+    {
+      "label": "Tag",
+      "name": "tag",
+      "type": "text"
+    }
+  ],
+  "os": [
+    "ubuntu",
+    "debian"
+  ]
+}

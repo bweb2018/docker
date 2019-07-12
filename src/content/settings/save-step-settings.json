@@ -1,0 +1,14 @@
+[
+  {
+    "label": "Step Name",
+    "name": "name",
+    "type": "text",
+    "required": true
+  },
+  {
+    "label": "Author",
+    "name": "author",
+    "type": "text",
+    "required": true
+  }
+]

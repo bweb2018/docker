@@ -1,0 +1,819 @@
+{
+  "name": "deepo",
+  "base": "ufoym/deepo",
+  "icon": "devicon-python-plain",
+  "config": [
+    {
+      "label": "Customize Docker",
+      "name": "tag",
+      "type": "tag-group",
+      "groupLabels": [
+        "Feature",
+        "Device",
+        "Python"
+      ],
+      "tags": [
+        {
+          "tagList": [
+            "all-jupyter",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "all-jupyter"
+        },
+        {
+          "tagList": [
+            "all-jupyter",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "all-jupyter-py36"
+        },
+        {
+          "tagList": [
+            "all-jupyter",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "all-jupyter-py27"
+        },
+        {
+          "tagList": [
+            "all-jupyter",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "all-jupyter-py36-cu90"
+        },
+        {
+          "tagList": [
+            "all-jupyter",
+            "GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "all-jupyter-py27-cu90"
+        },
+        {
+          "tagList": [
+            "all",
+            "GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "py27-cu90"
+        },
+        {
+          "tagList": [
+            "all",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "all-py27"
+        },
+        {
+          "tagList": [
+            "all",
+            "GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "all-py27-cu90"
+        },
+        {
+          "tagList": [
+            "caffe2",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "caffe2-cpu"
+        },
+        {
+          "tagList": [
+            "caffe2",
+            "CPU",
+            "Python 3.6"
+          ],
+          "name": "caffe2-py36-cpu"
+        },
+        {
+          "tagList": [
+            "latest",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "latest"
+        },
+        {
+          "tagList": [
+            "all",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "py36-cu90"
+        },
+        {
+          "tagList": [
+            "all",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "all"
+        },
+        {
+          "tagList": [
+            "all",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "all-py36"
+        },
+        {
+          "tagList": [
+            "cntk",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "cntk-cpu"
+        },
+        {
+          "tagList": [
+            "cntk",
+            "CPU",
+            "Python 3.6"
+          ],
+          "name": "cntk-py36-cpu"
+        },
+        {
+          "tagList": [
+            "all",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "all-py36-cu90"
+        },
+        {
+          "tagList": [
+            "torch",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "torch"
+        },
+        {
+          "tagList": [
+            "torch",
+            "GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "torch-cu90"
+        },
+        {
+          "tagList": [
+            "sonnet",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "sonnet-py27"
+        },
+        {
+          "tagList": [
+            "sonnet",
+            "GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "sonnet-py27-cu90"
+        },
+        {
+          "tagList": [
+            "all",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "cpu"
+        },
+        {
+          "tagList": [
+            "all",
+            "CPU",
+            "Python 3.6"
+          ],
+          "name": "py36-cpu"
+        },
+        {
+          "tagList": [
+            "all",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "all-cpu"
+        },
+        {
+          "tagList": [
+            "all",
+            "CPU",
+            "Python 3.6"
+          ],
+          "name": "all-py36-cpu"
+        },
+        {
+          "tagList": [
+            "caffe",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "caffe-py27"
+        },
+        {
+          "tagList": [
+            "caffe",
+            "GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "caffe-py27-cu90"
+        },
+        {
+          "tagList": [
+            "lasagne",
+            "CPU",
+            "Python 2.7"
+          ],
+          "name": "lasagne-py27-cpu"
+        },
+        {
+          "tagList": [
+            "caffe",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "caffe"
+        },
+        {
+          "tagList": [
+            "caffe",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "caffe-py36"
+        },
+        {
+          "tagList": [
+            "caffe",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "caffe-py36-cu90"
+        },
+        {
+          "tagList": [
+            "cntk",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "cntk"
+        },
+        {
+          "tagList": [
+            "cntk",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "cntk-py36"
+        },
+        {
+          "tagList": [
+            "cntk",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "cntk-py36-cu90"
+        },
+        {
+          "tagList": [
+            "tensorflow",
+            "CPU",
+            "Python 2.7"
+          ],
+          "name": "tensorflow-py27-cpu"
+        },
+        {
+          "tagList": [
+            "sonnet",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "sonnet-cpu"
+        },
+        {
+          "tagList": [
+            "sonnet",
+            "CPU",
+            "Python 3.6"
+          ],
+          "name": "sonnet-py36-cpu"
+        },
+        {
+          "tagList": [
+            "keras",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "keras"
+        },
+        {
+          "tagList": [
+            "keras",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "keras-py36"
+        },
+        {
+          "tagList": [
+            "keras",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "keras-py36-cu90"
+        },
+        {
+          "tagList": [
+            "mxnet",
+            "CPU",
+            "Python 2.7"
+          ],
+          "name": "mxnet-py27-cpu"
+        },
+        {
+          "tagList": [
+            "lasagne",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "lasagne"
+        },
+        {
+          "tagList": [
+            "lasagne",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "lasagne-py36"
+        },
+        {
+          "tagList": [
+            "lasagne",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "lasagne-py36-cu90"
+        },
+        {
+          "tagList": [
+            "chainer",
+            "CPU",
+            "Python 2.7"
+          ],
+          "name": "chainer-py27-cpu"
+        },
+        {
+          "tagList": [
+            "pytorch",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "pytorch-cpu"
+        },
+        {
+          "tagList": [
+            "pytorch",
+            "CPU",
+            "Python 3.6"
+          ],
+          "name": "pytorch-py36-cpu"
+        },
+        {
+          "tagList": [
+            "caffe",
+            "CPU",
+            "Python 2.7"
+          ],
+          "name": "caffe-py27-cpu"
+        },
+        {
+          "tagList": [
+            "pytorch",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "pytorch"
+        },
+        {
+          "tagList": [
+            "pytorch",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "pytorch-py36"
+        },
+        {
+          "tagList": [
+            "pytorch",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "pytorch-py36-cu90"
+        },
+        {
+          "tagList": [
+            "lasagne",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "lasagne-cpu"
+        },
+        {
+          "tagList": [
+            "lasagne",
+            "CPU",
+            "Python 3.6"
+          ],
+          "name": "lasagne-py36-cpu"
+        },
+        {
+          "tagList": [
+            "cntk",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "cntk-py27"
+        },
+        {
+          "tagList": [
+            "cntk",
+            "GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "cntk-py27-cu90"
+        },
+        {
+          "tagList": [
+            "chainer",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "chainer-py27"
+        },
+        {
+          "tagList": [
+            "chainer",
+            "GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "chainer-py27-cu90"
+        },
+        {
+          "tagList": [
+            "tensorflow",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "tensorflow-py27"
+        },
+        {
+          "tagList": [
+            "tensorflow",
+            "GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "tensorflow-py27-cu90"
+        },
+        {
+          "tagList": [
+            "tensorflow",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "tensorflow-cpu"
+        },
+        {
+          "tagList": [
+            "tensorflow",
+            "CPU",
+            "Python 3.6"
+          ],
+          "name": "tensorflow-py36-cpu"
+        },
+        {
+          "tagList": [
+            "keras",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "keras-py27"
+        },
+        {
+          "tagList": [
+            "keras",
+            "GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "keras-py27-cu90"
+        },
+        {
+          "tagList": [
+            "keras",
+            "CPU",
+            "Python 2.7"
+          ],
+          "name": "keras-py27-cpu"
+        },
+        {
+          "tagList": [
+            "theano",
+            "CPU",
+            "Python 2.7"
+          ],
+          "name": "theano-py27-cpu"
+        },
+        {
+          "tagList": [
+            "mxnet",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "mxnet-py27"
+        },
+        {
+          "tagList": [
+            "mxnet",
+            "GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "mxnet-py27-cu90"
+        },
+        {
+          "tagList": [
+            "caffe2",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "caffe2"
+        },
+        {
+          "tagList": [
+            "caffe2",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "caffe2-py36"
+        },
+        {
+          "tagList": [
+            "caffe2",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "caffe2-py36-cu90"
+        },
+        {
+          "tagList": [
+            "sonnet",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "sonnet"
+        },
+        {
+          "tagList": [
+            "sonnet",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "sonnet-py36"
+        },
+        {
+          "tagList": [
+            "sonnet",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "sonnet-py36-cu90"
+        },
+        {
+          "tagList": [
+            "chainer",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "chainer"
+        },
+        {
+          "tagList": [
+            "chainer",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "chainer-py36"
+        },
+        {
+          "tagList": [
+            "chainer",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "chainer-py36-cu90"
+        },
+        {
+          "tagList": [
+            "darknet",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "darknet-cpu"
+        },
+        {
+          "tagList": [
+            "torch",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "torch-cpu"
+        },
+        {
+          "tagList": [
+            "theano",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "theano"
+        },
+        {
+          "tagList": [
+            "theano",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "theano-py36"
+        },
+        {
+          "tagList": [
+            "theano",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "theano-py36-cu90"
+        },
+        {
+          "tagList": [
+            "all-jupyter",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "all-jupyter-cpu"
+        },
+        {
+          "tagList": [
+            "all-jupyter",
+            "CPU",
+            "Python 3.6"
+          ],
+          "name": "all-jupyter-py36-cpu"
+        },
+        {
+          "tagList": [
+            "all",
+            "CPU",
+            "Python 2.7"
+          ],
+          "name": "py27-cpu"
+        },
+        {
+          "tagList": [
+            "all",
+            "CPU",
+            "Python 2.7"
+          ],
+          "name": "all-py27-cpu"
+        },
+        {
+          "tagList": [
+            "all-jupyter",
+            "CPU",
+            "Python 2.7"
+          ],
+          "name": "all-jupyter-py27-cpu"
+        },
+        {
+          "tagList": [
+            "caffe2",
+            "CPU",
+            "Python 2.7"
+          ],
+          "name": "caffe2-py27-cpu"
+        },
+        {
+          "tagList": [
+            "mxnet",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "mxnet"
+        },
+        {
+          "tagList": [
+            "mxnet",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "mxnet-py36"
+        },
+        {
+          "tagList": [
+            "mxnet",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "mxnet-py36-cu90"
+        },
+        {
+          "tagList": [
+            "tensorflow",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "tensorflow"
+        },
+        {
+          "tagList": [
+            "tensorflow",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "tensorflow-py36"
+        },
+        {
+          "tagList": [
+            "tensorflow",
+            "GPU (CUDA 9.0)",
+            "Python 3.6"
+          ],
+          "name": "tensorflow-py36-cu90"
+        },
+        {
+          "tagList": [
+            "chainer",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "chainer-cpu"
+        },
+        {
+          "tagList": [
+            "chainer",
+            "CPU",
+            "Python 3.6"
+          ],
+          "name": "chainer-py36-cpu"
+        },
+        {
+          "tagList": [
+            "lasagne",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "lasagne-py27"
+        },
+        {
+          "tagList": [
+            "lasagne",
+            "GPU (CUDA 9.0)",
+            "Python 2.7"
+          ],
+          "name": "lasagne-py27-cu90"
+        },
+        {
+          "tagList": [
+            "theano",
+            "CPU",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "theano-cpu"
+        },
+        {
+          "tagList": [
+            "theano",
+            "CPU",
+            "Python 3.6"
+          ],
+          "name": "theano-py36-cpu"
+        },
+        {
+          "tagList": [
+            "darknet",
+            "CPU / GPU (CUDA 9.0)",
+            "Python 2.7 & Python 3.6"
+          ],
+          "name": "darknet"
+        }
+      ]
+    }
+  ]
+}

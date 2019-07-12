@@ -1,0 +1,44 @@
+.ms-Nav-group{
+  position: relative;
+  top: -14px;
+}
+.ms-FocusZone i{
+  position: relative;
+  left: 220px;
+}
+.ms-FocusZone i[data-icon-name='Completed']{
+  color: green;
+}
+.ms-FocusZone i[data-icon-name='warning']{
+  color:#D13438;
+}
+.ms-FocusZone i[data-icon-name="StatusCircleCheckmark"]{
+  z-index: 30;
+  position: relative;
+  top: -5px;
+  color: white
+}
+.ms-FocusZone li:nth-child(1) div[name='General
+']{
+  background: #FED9CC !important;
+}
+.ms-FocusZone li:nth-child(2) div[name='From
+']{
+  background: #FED9CC !important;
+}
+.ms-Nav-navItem:hover i[data-icon-name="StatusCircleCheckmark"]{
+  color: white
+}
+.ms-Nav-navItem .ms-Button-flexContainer:hover>i[data-icon-name='warning']{
+  color: red;
+}
+.linkText-39{
+  color: #333 !important;
+  font-family: "semibold", helvetica, sans-serif;
+}
+button[aria-label="Run"],button[aria-label="Entrypoint"]{
+  display: none;
+}
+.ml-1{
+  margin-left: -10px
+}
