@@ -43,7 +43,8 @@ class App extends React.Component {
       savedSteps: [],
       baseDockers: '',
       runSteps: [],
-      enSteps: []
+      enSteps: [],
+      addValue: []
     };
     this.onUpdate = this.onUpdate.bind(this);
     this.onSwitchContent = this.onSwitchContent.bind(this);
@@ -85,7 +86,7 @@ class App extends React.Component {
     });
   }
   addSteps(step,type) {
-    const { runSteps, enSteps, baseDockers } = this.state
+    const { runSteps, enSteps, addValue } = this.state
     switch (type) {
       case 'add_run_step':
         runSteps.push(step)
@@ -100,7 +101,9 @@ class App extends React.Component {
           this.setState({enSteps: step})
           break;
       case 'baseDockers':
-        this.setState({baseDockers: step})
+        this.setState({baseDockers: step, addValue:[]})
+      case 'addValue':
+        addValue.push(step)
       default:
     }
     
@@ -202,9 +205,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { config, content, baseDockers, runSteps, enSteps } = this.state;
+    const { config, content, baseDockers, runSteps, enSteps, addValue } = this.state;
     const docker = baseDockers? baseDockers: ''
-    console.log(baseDockers);
+    
     return (
       <div className="helvetica flex flex-column vh-100">
         {/*<Title*/}
@@ -244,6 +247,7 @@ class App extends React.Component {
               <div className="w-70 pb4 mh2 overflow-y-auto border-box">
                 <Content
                     addIcon={this.addIcon}
+                    addValue={addValue}
                     baseDockers={docker}
                     addSteps={this.addSteps}
                     delFromDocker={this.delFromDocker}

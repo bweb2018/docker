@@ -21,7 +21,7 @@ const stepTypeTitle = {
 };
 
 const Content = ({
-  config, content, onUpdate, onSwitchContent, enSteps, runSteps, baseDockers, addIcon, addSteps
+  config, content, onUpdate, onSwitchContent, enSteps, runSteps, baseDockers, addIcon, addSteps, addValue
 }) => {
   const stepType= stepTypeTitle[content.type]
   const stepRunBool = stepType === 'Edit Run Step'
@@ -64,7 +64,10 @@ const Content = ({
         switch (content.type) {
           case 'add_run_step':
             return (
-              <AddStep type="run" {...sharedProps} runSteps={runSteps} enSteps={enSteps} />);
+              <AddStep type="run" {...sharedProps}
+               runSteps={runSteps} 
+               enSteps={enSteps} 
+               />);
           case 'add_entrypoint_step':
             return (
               <AddStep type="entrypoint" {...sharedProps} enSteps={enSteps} runSteps={runSteps} />
@@ -99,7 +102,7 @@ const Content = ({
             );
           case 'edit_docker':
             return (
-              <EditDocke {...sharedProps} />
+              <EditDocke {...sharedProps} addValue={addValue} />
             );
           case 'edit_dockerfile':
             return (

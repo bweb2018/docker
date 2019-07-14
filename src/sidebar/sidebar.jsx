@@ -25,7 +25,7 @@ class Bar extends React.Component {
     }
 
     _onLinkClick = (item,k) =>{
-        const { runSteps, enSteps, onSwitchContent, config } = this.props
+        const { runSteps, enSteps, onSwitchContent } = this.props
         let {key} = k;
         const  keyType = typeof k.key;
         switch ( keyType === 'string') {
@@ -86,7 +86,7 @@ class Bar extends React.Component {
                 styles={{
                     chevronIcon: {color: yellow},
                     root: { width: 290 },
-                    link: { height: 52, whiteSpace: 'pre', lineHeight: 10 }
+                    link: { height: 52, whiteSpace: 'pre', lineHeight: 12 }
                 }}
                 groups={[
                     {

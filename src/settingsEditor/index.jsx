@@ -11,18 +11,15 @@ import validate from './validator';
 
 export default class SettingsEditor extends React.Component {
   onUpdate(key, value) {
-    
     const { onUpdate } = this.props;
     const res = {};
-    
     res[key] = value;
     if(!onUpdate) return 
     onUpdate(res)
   }
 
   render() {
-    const { settings, value, disabled, content, baseDockers, isAdd, putAdd } = this.props;
-    
+    const { settings, value, disabled, content, baseDockers, isAdd, putAdd, addValue, addSteps, baseDocker } = this.props;
     const t = content? content.type:''
     return settings.map((setting, i) => {
       let { label } = setting;
@@ -34,7 +31,6 @@ export default class SettingsEditor extends React.Component {
       }
       let contents = null;
       switch (setting.type) {
-        
         case 'text':
           contents = (
             <TextFields
@@ -49,10 +45,15 @@ export default class SettingsEditor extends React.Component {
           break;
         case 'choice':
             console.log('choice')
-           
           contents = (
             <ChoiceGroup
+              addSteps={addSteps}
+              addValue={addValue}
+              isAdd={isAdd}
+              putAdd={putAdd}
               label={label}
+              baseDockers={baseDockers}
+              baseDocker={baseDocker}
               value={value[setting.name]}
               onUpdate={val => this.onUpdate(setting.name, val)}
               options={setting.options}
@@ -77,10 +78,13 @@ export default class SettingsEditor extends React.Component {
         case 'tag-group':
           contents = (
             <TagGroup
+              addSteps={addSteps}
+              addValue={addValue}
               isAdd={isAdd}
               putAdd={putAdd}
               label={label}
               baseDockers={baseDockers}
+              baseDocker={baseDocker}
               value={value[setting.name]}
               onUpdate={val => this.onUpdate(setting.name, val)}
               groupLabels={setting.groupLabels}

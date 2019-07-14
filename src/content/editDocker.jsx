@@ -31,7 +31,6 @@ import { root } from 'postcss-selector-parser';
       }
     getPreset = memoize(base => dockers.find(p => p.base === base));
       onPresetChosen(to, index) {
-        const {id} = this.state
         this.setState({
         id: index,
       })
@@ -80,22 +79,19 @@ import { root } from 'postcss-selector-parser';
     }
   }
     putAdd (t) {
-      const { isAdd } = t.state
       t.setState({
         isAdd: false 
       })
     }
     _clicked () {
-
       const {  baseDocker, th, text,  } = this
-      const { items, props:{addSteps, addIcon}, putAdd} = th
+      const { items, props:{addSteps, addIcon, addValue}, putAdd} = th
       if(baseDocker.invalid && items === 'Custom'){
         alert('docker should not be empty')
         return
       }
       if (text === 'Apply') {
         if(!baseDocker.image_url) return
-       
         th.setState({
           isShow: false,
           isAdd: true
@@ -145,16 +141,17 @@ import { root } from 'postcss-selector-parser';
                                                       />
     }
     render() {
-      const { config: { base_docker: baseDocker }, baseDockers} = this.props;
+      const { config: { base_docker: baseDocker }, baseDockers, addValue, addSteps } = this.props;
       const { id,isAdd } = this.state
-      console.log(isAdd)
       if (baseDocker.custom) {
       this.a = <div className="bg-white">
                 <div className="mv2">Custom Base Docker</div>
                 <SettingsEditor
+                addValue={addValue}
                 baseDockers={baseDockers}
                 settings={Settings.docker}
                 isAdd={isAdd}
+                addSteps={addSteps}
                 putAdd={()=>this.putAdd(this)}
                 value={baseDocker}
                 onUpdate={this.onCustomUpdate}
@@ -169,9 +166,12 @@ import { root } from 'postcss-selector-parser';
           <div className="c-st mv2 f7">[Image: {baseDocker.image_url}]</div>
           <SettingsEditor
           isAdd={isAdd}
+          addValue={addValue}
+          addSteps={addSteps}
           putAdd={()=>this.putAdd(this)}
           baseDockers={baseDockers}
           settings={preset.config}
+          baseDocker={baseDocker}
           value={{ tag: baseDocker.image_url && baseDocker.image_url.split(':').pop() }}
           onUpdate={this.onPresetUpdate}
           />
@@ -181,19 +181,19 @@ import { root } from 'postcss-selector-parser';
       return (
         <ul className={'list pl4 f6 pr1 black-80'}>
           {dockers.map((item, index) => <li className={'cb pv3 bt b--near-white '} key={index}><span className={'pointer h3 mv7 '}  
-          onClick={() => { this.items= item, this.onPresetChosen(item,index)}}>{ index === id ? '' : item.name}</span>
+            onClick={() => { this.items= item, this.onPresetChosen(item,index)}}>{ index === id ? '' : item.name}</span>
             {/* <ResetButton onClick={ ()=> {this.items= item, this.onPresetChosen(item,index,id)}} /> */}
-          <i className= {C({"dn":index === id,},"fr f7 ms-Icon ms-Icon--ChevronDownMed black-30")}
-             onClick= {() => { this.items= item, this.onPresetChosen(item,index)}}
-            />
-          <i className={C({'dn':index !== id,},"fr f7 ms-Icon ms-Icon--ChevronUpMed black-30")}
-            onClick= {()=> this.setState({id:10})}
-            />
+            <i className= {C({"dn":index === id,},"fr f7 ms-Icon ms-Icon--ChevronDownMed black-30")}
+              onClick= {() => { this.items= item, this.onPresetChosen(item,index)}}
+              />
+            <i className={C({'dn':index !== id,},"fr f7 ms-Icon ms-Icon--ChevronUpMed black-30")}
+              onClick= {()=> this.setState({id:10})}
+              />
             { index === id ? this.a : <div></div>}
           </li>)}
           <li className={'cb pv3 bt-m bt bb b--near-white'}><span  className={'h3 mv7 pointer'}
-           onClick={() => { this.items = 'Custom', this.onPresetChosen('Custom',4)}}>{ id === 4 ? '' : 'custom'}</span>
-          <ResetButton onClick={() => this.onPresetChosen(null)} index={4} id={id}/>
+            onClick={() => { this.items = 'Custom', this.onPresetChosen('Custom',4)}}>{ id === 4 ? '' : 'custom'}</span>
+            <ResetButton onClick={() => this.onPresetChosen(null)} index={4} id={id}/>
             { id === 4 ? this.a : <div></div>}
           </li>
         </ul>
