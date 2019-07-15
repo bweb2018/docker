@@ -85,25 +85,26 @@ class App extends React.Component {
       },
     });
   }
-  addSteps(step,type) {
+  addSteps(step,type,docker) {
     const { runSteps, enSteps, addValue } = this.state
     switch (type) {
       case 'add_run_step':
         runSteps.push(step)
-            break;
+        break;
       case 'run':
         this.setState({runSteps: step})
-            break;
+        break;
       case 'en':
-          enSteps.push(step)
-            break;
+        enSteps.push(step)
+        break;
       case 'entrypoint':
-          this.setState({enSteps: step})
-          break;
+        this.setState({enSteps: step})
+        break;
       case 'baseDockers':
         this.setState({baseDockers: step, addValue:[]})
       case 'addValue':
         addValue.push(step)
+        break;
       default:
     }
     
@@ -181,20 +182,24 @@ class App extends React.Component {
   }
 
   addIcon = ({on,type,iconParameter})=> {
-    if(type === 'from'){
-      type = iconParameter.from
-    }else if(type === 'general'){
-      type = iconParameter.general
+    switch (type) {
+      case 'from':
+        type = iconParameter.from
+        break;
+      case 'general':
+        type = iconParameter.general
+        break;
+        default:
     }
-    const buttons = document.querySelectorAll('ul li')
-    const diva = buttons[type.bl].querySelector('div button')
+    const list = document.querySelectorAll('ul li')
     const i = document.createElement('i')
-    i.className = `ms-Icon ms-Icon--${type.name}`
-    i.style.zIndex = type.z
-    i.style.color = type.color
-    i.style.left= type.lef
-    i.style.float= 'left'
-    i.style.top= type.top
+      i.className = `ms-Icon ms-Icon--${type.name}`
+      i.style.zIndex = type.z
+      i.style.color = type.color
+      i.style.left= type.lef
+      i.style.float= 'left'
+      i.style.top= type.top
+    const diva = list[type.bl].querySelector('div button')
     if (on) {
       if(diva.querySelectorAll('i')[1]) return
       diva.appendChild(i)
@@ -207,7 +212,6 @@ class App extends React.Component {
   render() {
     const { config, content, baseDockers, runSteps, enSteps, addValue } = this.state;
     const docker = baseDockers? baseDockers: ''
-    
     return (
       <div className="helvetica flex flex-column vh-100">
         {/*<Title*/}

@@ -31,6 +31,7 @@ export default class SettingsEditor extends React.Component {
       }
       let contents = null;
       switch (setting.type) {
+        
         case 'text':
           contents = (
             <TextFields
@@ -45,6 +46,7 @@ export default class SettingsEditor extends React.Component {
           break;
         case 'choice':
             console.log('choice')
+           
           contents = (
             <ChoiceGroup
               addSteps={addSteps}
@@ -83,8 +85,8 @@ export default class SettingsEditor extends React.Component {
               isAdd={isAdd}
               putAdd={putAdd}
               label={label}
-              baseDockers={baseDockers}
               baseDocker={baseDocker}
+              baseDockers={baseDockers}
               value={value[setting.name]}
               onUpdate={val => this.onUpdate(setting.name, val)}
               groupLabels={setting.groupLabels}

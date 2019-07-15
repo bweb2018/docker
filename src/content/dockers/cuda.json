@@ -1,5 +1,5 @@
 {
-  "name": "CUDA",
+  "name": "cuda",
   "base": "nvidia/cuda",
   "icon": "fa fa-desktop",
   "config": [

@@ -69,21 +69,21 @@ export default class TagGroup extends React.Component {
 
   render() {
     const {
-      label, value, groupLabels, tags, disabled, baseDockers, isAdd, putAdd, addValue, addSteps, baseDocker
+      label, value, groupLabels, tags, disabled, baseDockers, isAdd, putAdd, addSteps, addValue, baseDocker
     } = this.props;
     const { parts } = this.getOrDefaultChosen((value && this.getReverseLookup(tags)[value]) || []);
     const content = [];
     let cur = this.getTagTree(tags);
     for (let i = 0; i < groupLabels.length; i += 1) {
       content.push(
-        <div className="pb1 f7" key={i}>
+        <div className="pt3 pb1 f7" key={i}>
           <ChoiceGroup
-            addSteps={addSteps}
             isAdd={isAdd}
-            addValue={addValue}
             putAdd={putAdd}
-            baseDockers={baseDockers}
+            addSteps={addSteps}
+            addValue={addValue}
             baseDocker={baseDocker}
+            baseDockers={baseDockers}
             label={groupLabels[i]}
             options={Object.keys(cur).map( x => ({ name: x}))}
             value={parts[i]}

@@ -25,7 +25,7 @@ class Bar extends React.Component {
     }
 
     _onLinkClick = (item,k) =>{
-        const { runSteps, enSteps, onSwitchContent } = this.props
+        const { runSteps, enSteps, onSwitchContent, config } = this.props
         let {key} = k;
         const  keyType = typeof k.key;
         switch ( keyType === 'string') {
@@ -77,7 +77,8 @@ class Bar extends React.Component {
         const { content, config,  baseDockers, runSteps, enSteps } = this.props
         this.run_steps =  this.getStep(runSteps)
         this.entrypoint_steps = this.getStep(enSteps)
-        let docker = baseDockers ? baseDockers.image_url: ''
+        let docker = baseDockers ? baseDockers.baseDocker.image_url: ''
+        const icons = ['StatusCircleCheckmark','CircleFill']
         return (
             <div>
             <Nav
@@ -86,7 +87,7 @@ class Bar extends React.Component {
                 styles={{
                     chevronIcon: {color: yellow},
                     root: { width: 290 },
-                    link: { height: 52, whiteSpace: 'pre', lineHeight: 12 }
+                    link: { height: 52, whiteSpace: 'pre', lineHeight: 10 }
                 }}
                 groups={[
                     {
@@ -100,7 +101,7 @@ class Bar extends React.Component {
                             {
                                 name: 'From'+'\n'+`${docker}`,
                                 key: 'edit_docker',
-                                icon: docker ? `StatusCircleCheckmark` : 'warning',
+                                icon: docker ? 'StatusCircleCheckmark' : 'warning',
                             },
                             {
                                 name: 'Run',
