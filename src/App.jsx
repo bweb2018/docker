@@ -163,12 +163,8 @@ class App extends React.Component {
     Alert.error(error.toString(), { position: 'bottom-right' });
   }
   onClick () {
-    const { config, baseDockers, content } = this.state;
+    const { config, baseDockers } = this.state;
     try {
-      if(content.type === 'add_run_step' || content.type === 'add_entrypoint_step' ) {
-        if(config.run_steps.findIndex((step)=> step.type === 'conda_install') >= 0) config.run_steps.shift()
-        if(config.entrypoint_steps.findIndex((step)=> step.type === 'conda_install') >= 0) config.entrypoint_steps.shift()
-      }
       if(!baseDockers) {Alert.error('baseDockers should not be empty')
         return}
       this.onSwitchContent({
@@ -212,6 +208,7 @@ class App extends React.Component {
   render() {
     const { config, content, baseDockers, runSteps, enSteps, addValue } = this.state;
     const docker = baseDockers? baseDockers: ''
+    const { image_url } = docker.baseDocker ? docker.baseDocker :''
     return (
       <div className="helvetica flex flex-column vh-100">
         {/*<Title*/}
@@ -239,8 +236,8 @@ class App extends React.Component {
                 </div>
                 <div style={{ flexGrow: 0}}>
                   <Button
-                      className= {config.invalid && !docker.image_url ? "f7 db w-60 bg-black-10 mid-gray  mb5 c-t tc center": "f7 db w-60 bg mid-gray  mb5 c-t tc center"}
-                      disabled={config.invalid && !docker.image_url}
+                      className= {config.invalid || !image_url? "f7 db w-60 bg-black-10 mid-gray  mb5 c-t tc center": "f7 db w-60 bg mid-gray  mb5 c-t tc center"}
+                      disabled={config.invalid || !image_url}
                       dark
                       onClick={this.onClick}
                   >

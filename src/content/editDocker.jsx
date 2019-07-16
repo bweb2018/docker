@@ -32,9 +32,11 @@ import { root } from 'postcss-selector-parser';
       }
     getPreset = memoize(base => dockers.find(p => p.base === base));
       onPresetChosen(to, index) {
+        const { id } = this.state
         this.setState({
         id: index,
       })
+        if(id === index) return
         let newBaseDocker;
         if (!to) {
         newBaseDocker = {};

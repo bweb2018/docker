@@ -1,5 +1,7 @@
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
+import * as C from 'classnames'
+import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react'
 
 import Button from '../components/button'
 import * as Models from '../models';
@@ -9,6 +11,7 @@ import EditGeneral from './editGeneral';
 import EditDocke from './editDocker';
 import EditDockerfile from './editDockerfile';
 import  * as iconParameter from  '../sidebar/iconParameter'
+import { styles } from 'ansi-colors';
 
 const stepTypeTitle = {
   add_run_step: 'Add Run Step',
@@ -20,12 +23,37 @@ const stepTypeTitle = {
   edit_dockerfile: 'Generated Dockerfile',
 };
 
+function click (props,button) {
+  const { content:{type}, onSwitchContent } = props
+  const isSwitchBool = button.target.innerHTML === 'Next Page'
+  switch (type) {
+    case 'edit_general':
+        onSwitchContent({ type: 'edit_docker' })
+        break;
+    case 'edit_docker':
+        isSwitchBool ?
+        onSwitchContent({ type: 'add_run_step' }) :
+        onSwitchContent({ type: 'edit_general' })
+        break;
+    case 'add_run_step':
+        isSwitchBool ?
+        onSwitchContent({ type: 'add_entrypoint_step' }) :
+        onSwitchContent({ type: 'edit_docker' })
+        break;
+    case 'add_entrypoint_step':
+        onSwitchContent({ type: 'add_run_step' })
+        break;
+  }
+} 
+
 const Content = ({
   config, content, onUpdate, onSwitchContent, enSteps, runSteps, baseDockers, addIcon, addSteps, addValue
 }) => {
   const stepType= stepTypeTitle[content.type]
   const stepRunBool = stepType === 'Edit Run Step'
   const stepEnBool =  stepType === 'Edit Entrypoint Step'
+  const stepAddEnBool = content.type === 'add_entrypoint_step'
+  const stepEditBool = content.type === 'edit_general'
   const sharedProps = {
     addIcon,
     baseDockers,
@@ -115,6 +143,31 @@ const Content = ({
             return null;
         }
       })()}
+    <PrimaryButton
+      content={content} 
+      styles={{
+        root:{
+          display: stepEditBool ? 'none': '',
+          marginLeft:'32px',
+          width:'132px'
+      }}}
+      onClick={ click.bind(this,{...sharedProps}) }
+      allowDisabledFocus={true}
+      >
+      Previous Page
+    </PrimaryButton>
+    <PrimaryButton
+      styles={{
+        root:{
+          display: stepAddEnBool ? 'none': '',
+          marginLeft:'32px',
+          width:'132px'
+        }}}
+      onClick={ click.bind(this,{...sharedProps}) }
+      allowDisabledFocus={true}  
+    >
+      Next Page
+    </PrimaryButton>
     </div>
   );
 };

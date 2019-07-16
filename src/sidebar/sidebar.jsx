@@ -27,18 +27,17 @@ class Bar extends React.Component {
     _onLinkClick = (item,k) =>{
         const { runSteps, enSteps, onSwitchContent, config } = this.props
         let {key} = k;
-        const  keyType = typeof k.key;
-        switch ( keyType === 'string') {
-            case key === 'edit_general':
+        switch ( key) {
+            case 'edit_general':
                 onSwitchContent({ type: 'edit_general' })
                 break;
-            case key === 'edit_docker':
+            case 'edit_docker':
                 onSwitchContent({ type: 'edit_docker' })
                 break;
-            case key === 'add_run_step':
+            case 'add_run_step':
                 onSwitchContent({ type: 'add_run_step' })
                 break;
-            case key === 'add_entrypoint_step':
+            case 'add_entrypoint_step':
                 onSwitchContent({ type: 'add_entrypoint_step' })
                 break;
         }

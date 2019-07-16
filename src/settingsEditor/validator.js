@@ -27,7 +27,6 @@ export default function validate(settings, value) {
         col => uniq(value.map(row => row[col])).length === value.length,
       );
     }
-
     return true;
   } catch (ex) {
     return false;

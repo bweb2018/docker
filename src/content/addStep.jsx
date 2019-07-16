@@ -43,7 +43,7 @@ class AddStep extends React.Component {
     this.onEdit(null);
   }
   _addSteps = (item,add)=> {
-    const { config, type, onUpdate, onSwitchContent, addSteps, content} = this.props;
+    const { config, type, onUpdate, onSwitchContent, addSteps } = this.props;
     const stepListName = `${type}_steps`;
     const step = {
       id: uuid(),
@@ -70,7 +70,6 @@ class AddStep extends React.Component {
 
   renderBaseStepList(filteredSteps) {
     const { content, onUpdate, onSwitchContent } = this.props;
-    console.log(content.type);
     const { selectedCard } = this.state;
     return (
         <ul className={'list pl4 f6 black-80'}>
@@ -104,7 +103,6 @@ class AddStep extends React.Component {
            />
           {content.stepToEdit && content.stepToEdit.type === item.type? <EditStep
               type="run"
-              onRef={this.onRef}
               key={content.stepToEdit.id || ''}
               stepToEdit={content.stepToEdit}
               onUpdate={onUpdate}
@@ -118,7 +116,8 @@ class AddStep extends React.Component {
 
   render() {
     const { baseDockers, type } = this.props;
-    const filteredSteps = filterSteps(type, baseDockers.os);
+    const { os } = baseDockers.baseDocker ? baseDockers.baseDocker:''
+    const filteredSteps = filterSteps(type, os);
     return (
       <div>
         {this.renderBaseStepList(filteredSteps)}
