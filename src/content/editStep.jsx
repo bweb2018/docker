@@ -39,7 +39,7 @@ class EditStep extends React.Component {
   onSaveInfoChange = (saveInfoUpdate) => {
     const { saveInfo } = this.state;
     const newSaveInfo = { ...cloneDeep(saveInfo), ...saveInfoUpdate };
-    // newSaveInfo.invalid = !validate(Settings.saveStep, newSaveInfo);
+    newSaveInfo.invalid = !validate(Settings.saveStep, newSaveInfo);
     this.setState({ saveInfo: newSaveInfo });
   }
   
@@ -49,11 +49,9 @@ class EditStep extends React.Component {
   
   isDelStep = (steps)=> {
     const {
-      type, onSwitchContent, addSteps, content, runSteps, enSteps, config:{run_steps, entrypoint_steps}
+      type, onSwitchContent, addSteps, content, runSteps, enSteps
     } = this.props;
-    const newStepList = cloneDeep(steps);
-    const idx = steps.findIndex((item,index) => item.id === newStepList[index].id);
-    steps.splice(idx, 1);
+    steps.splice(0, 1)
     if(!runSteps.length&&!enSteps.length){
       onSwitchContent({type: 'edit_general'})
     }else if (idx === steps.length) {

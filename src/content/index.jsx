@@ -52,8 +52,14 @@ const Content = ({
   const stepType= stepTypeTitle[content.type]
   const stepRunBool = stepType === 'Edit Run Step'
   const stepEnBool =  stepType === 'Edit Entrypoint Step'
+  const stepEditDockerBool =  content.type === 'edit_docker'
   const stepAddEnBool = content.type === 'add_entrypoint_step'
+  const stepAddRunBool = content.type === 'add_run_step'
   const stepEditBool = content.type === 'edit_general'
+  const stepEditRunBool = content.type === 'edit_run_step'
+  const stepEditEnBool = content.type === 'edit_entrypoint_step'
+  const stepEditDockerfileBool = content.type === 'edit_dockerfile'
+  const stepToEdit = content.stepToEdit ? content.stepToEdit : ''
   const sharedProps = {
     addIcon,
     baseDockers,
@@ -64,9 +70,9 @@ const Content = ({
     addSteps
   };
   return (
-    <div className="black-80 mt2">
-      <div className="pl4 mb3 h2 flex relative items-center black-50">{stepTypeTitle[content.type]}
-        <i className={"f7 ml3 ms-Icon ms-Icon--ChevronRight black-30"} aria-hidden="true" />
+    <div className="mt2">
+      <div className="pl4 mb3 h2 flex relative items-center">{stepTypeTitle[content.type]}
+        <i className={"f7 ml3 ms-Icon ms-Icon--ChevronRight"} aria-hidden="true" />
         {/* <span>{ stepRunBool ? addRunStep.name : '' || stepEnBool ? addEnStep.name : ''}</span> */}
         { stepType === 'Base Docker' ? 
             <Button 
@@ -106,8 +112,8 @@ const Content = ({
                   type="run"
                   runSteps={runSteps}
                   enSteps={enSteps}
-                  key={content.stepToEdit?content.stepToEdit.id : ''}
-                  stepToEdit={content.stepToEdit}
+                  key={stepToEdit?content.stepToEdit.id : ''}
+                  stepToEdit={stepToEdit}
                   onUpdate={onUpdate}
                   {...sharedProps}
               />
@@ -118,8 +124,8 @@ const Content = ({
                 runSteps={runSteps}
                 enSteps={enSteps}
                 type="entrypoint"
-                key={content.stepToEdit?content.stepToEdit.id : ''}
-                stepToEdit={content.stepToEdit}
+                key={stepToEdit?content.stepToEdit.id : ''}
+                stepToEdit={stepToEdit}
                 onUpdate={onUpdate}
                 {...sharedProps}
               />
@@ -145,29 +151,30 @@ const Content = ({
       })()}
     <PrimaryButton
       content={content} 
+      text='Previous Page'
       styles={{
         root:{
-          display: stepEditBool ? 'none': '',
-          marginLeft:'32px',
-          width:'132px'
+          display: C({'none': stepEditBool || stepEditRunBool || stepEditEnBool || stepEditDockerfileBool}),
+          marginLeft: C({'696px': stepEditDockerBool || stepAddRunBool, '858px': stepAddEnBool}),
+          width: '132px',
+          marginTop: '16px',
+          
       }}}
       onClick={ click.bind(this,{...sharedProps}) }
       allowDisabledFocus={true}
-      >
-      Previous Page
-    </PrimaryButton>
+      />
     <PrimaryButton
+      text='Next Page'
       styles={{
         root:{
-          display: stepAddEnBool ? 'none': '',
-          marginLeft:'32px',
-          width:'132px'
+          display: C({'none':stepAddEnBool || stepEditRunBool || stepEditEnBool || stepEditDockerfileBool}),
+          marginLeft: C({'858px': stepEditBool,'32px': stepEditDockerBool || stepAddRunBool}),
+          width: '132px',
+          marginTop: '16px'
         }}}
       onClick={ click.bind(this,{...sharedProps}) }
       allowDisabledFocus={true}  
-    >
-      Next Page
-    </PrimaryButton>
+    />
     </div>
   );
 };

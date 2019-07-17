@@ -6,8 +6,13 @@
   position: relative;
   left: 220px;
 }
-.ms-FocusZone i[data-icon-name='Completed']{
-  color: green;
+.ms-FocusZone .ms-Nav-linkText{
+  width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ms-FocusZone i[data-icon-name="StatusCircleCheckmark"]{
+  top: -1px !important
 }
 .ms-FocusZone i[data-icon-name='warning']{
   color:#D13438;

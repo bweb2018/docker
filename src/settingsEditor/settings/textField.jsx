@@ -22,7 +22,6 @@ export default class TextFields extends React.Component {
     } else {
       this.setState({ invalid: true });
     }
-    console.log(value)
     onUpdate(value);
   }
   _inputMessage = (e)=> {

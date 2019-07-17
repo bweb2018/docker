@@ -52,6 +52,7 @@ class AddStep extends React.Component {
       config: item.defaultConfig || {},
     };
     if (item.config && !item.config.every(c => c.optional)) {
+      console.log(1111);
       step.invalid = true;
     }
     const newStepList = cloneDeep(config[stepListName]);
@@ -81,7 +82,7 @@ class AddStep extends React.Component {
           }}>{ item.name }</span>
           <i 
             className={C({'dn':content.stepToEdit && content.stepToEdit.type === item.type},
-            "fr f7 ms-Icon ms-Icon--ChevronDownMed black-30")}
+            "fr pointer mr3 f7 ms-Icon ms-Icon--ChevronDownMed")}
             aria-hidden="true" 
             onClick={(e)=>{
               e.stopPropagation();
@@ -90,7 +91,7 @@ class AddStep extends React.Component {
            />
            <i 
             className={C({'dn':!content.stepToEdit || content.stepToEdit && content.stepToEdit.type !== item.type},
-            "fr f7 ms-Icon ms-Icon--ChevronUpMed black-30")}
+            "fr pointer mr3 f7 ms-Icon ms-Icon--ChevronUpMed")}
             aria-hidden="true" 
             onClick={(e)=>{
               e.stopPropagation();

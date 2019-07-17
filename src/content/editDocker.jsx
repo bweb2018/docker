@@ -3,7 +3,6 @@ import * as React from 'react';
 import C from 'classnames';
 import { cloneDeep, memoize } from 'lodash';
 import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react'
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
 
 import * as Models from '../models';
 import Button from '../components/button';
@@ -13,8 +12,6 @@ import * as Settings from './settings';
 import { getStep } from './steps';
 import  * as iconParameter from  '../sidebar/iconParameter'
 import {validateConfig} from "../config-utils";
-import { Position } from 'office-ui-fabric-react/lib/utilities/positioning';
-import { root } from 'postcss-selector-parser';
 
     const ResetButton = ({ onClick, item, index, id}) => (<Button className="fr" onClick={onClick} >
     { <i className={ index === id ? "fr f7 ms-Icon ms-Icon--ChevronUpMed black-30" : "f7 ms-Icon ms-Icon--ChevronDownMed black-30"} aria-hidden="true" /> }
@@ -87,9 +84,10 @@ import { root } from 'postcss-selector-parser';
       })
     }
     _clicked () {
-      const {  baseDocker, th, text,  } = this
-      const { items, props:{addSteps, addIcon, addValue}, putAdd} = th
-      if(baseDocker.invalid && items === 'Custom'){
+      const {  baseDocker, th, text, baseDockers } = this
+      const { items, props:{addSteps, addIcon} } = th
+      const { image_url } = baseDockers ? baseDockers.baseDocker:''
+      if(baseDocker.invalid || image_url){
         alert('docker should not be empty')
         return
       }
@@ -132,7 +130,7 @@ import { root } from 'postcss-selector-parser';
         const th = this
         const { isShow } = this.state
         const presetBase = baseDockers? baseDockers.baseDocker.presetBase ? cloneDeep(baseDockers.baseDocker.presetBase ) : 'a': ''
-        return baseDocker.presetBase === presetBase || isShow ?  <DefaultButton
+        return baseDocker.presetBase === presetBase || isShow || baseDockers.items  ?  <DefaultButton
             baseDocker={baseDocker}
             th={th}
             styles={{root:{border:'none'}}}
@@ -152,7 +150,7 @@ import { root } from 'postcss-selector-parser';
       const { id,isAdd } = this.state
       const docker = baseDockers.items? baseDockers.items:''
       if (baseDocker.custom) {
-      this.a = <div className="bg-white">
+      this.a = <div className="bg-white black-60">
                 <div className="mv2">Custom Base Docker</div>
                 <SettingsEditor
                 addValue={addValue}
@@ -169,7 +167,7 @@ import { root } from 'postcss-selector-parser';
       }
       if (baseDocker.presetBase) {
           const preset = this.getPreset(baseDocker.presetBase);
-          this.a = <div className="bg-white">
+          this.a = <div className="bg-white black-60">
           {/* <div className="mv2">{preset.name}</div> */}
           <div className="c-st mv2 f7">[Image: {baseDocker.image_url}]</div>
           <SettingsEditor
@@ -187,23 +185,30 @@ import { root } from 'postcss-selector-parser';
           </div>
     }
       return (
-        <ul className={'list pl4 f6 pr1 black-80'}>
-          {dockers.map((item, index) => <li className={'cb pv3 bt b--near-white '} key={index}><span className={'pointer h3 mv7 '}  
+        <ul className={'list pl4 f6 pr1'}>
+          {dockers.map((item, index) => <li className={'cb pv3 bt b--near-white '} key={index}><span className={C({'blue':docker.name === item.name},'pointer h3 mv7')}  
             onClick={() => { this.items= item, this.onPresetChosen(item,index)}}>{item.name}
             </span>
             <i className={C({'dn':docker.name !== item.name},'v-mid ml3 ms-Icon ms-Icon--CircleFill blue')} />
             <i className={C({'dn':docker.name !== item.name},'v-top nl2_9 ms-Icon ms-Icon--StatusCircleCheckmark white')} />
-            <i className= {C({"dn":index === id,},"fr f7 ms-Icon ms-Icon--ChevronDownMed black-30")}
+            <i className= {C({"dn":index === id,},"pointer mr3 fr f7 ms-Icon ms-Icon--ChevronDownMed black-30")}
              onClick= {() => { this.items= item, this.onPresetChosen(item,index)}}
             />
-            <i className={C({'dn':index !== id,},"fr f7 ms-Icon ms-Icon--ChevronUpMed black-30")}
+            <i className={C({'dn':index !== id,},"pointer mr3 fr f7 ms-Icon ms-Icon--ChevronUpMed black-30")}
             onClick= {()=> this.setState({id:10})}
             />
             { index === id ? this.a : <div></div>}
           </li>)}
-          <li className={'cb pv3 bt-m bt bb b--near-white'}><span  className={'h3 mv7 pointer'}
-            onClick={() => { this.items = 'Custom', this.onPresetChosen('Custom',4)}}>{ id === 4 ? '' : 'custom'}</span>
-            <ResetButton onClick={() => this.onPresetChosen(null)} index={4} id={id}/>
+          <li className={'cb pv3 bt-m bt bb b--near-white'}><span  className={C({'blue':docker==='Custom'},'h3 mv7 pointer')}
+            onClick={() => { this.items = 'Custom', this.onPresetChosen('Custom',4)}}>Custom</span>
+            <i className={C({'dn':docker !== 'Custom'},'v-mid ml3 ms-Icon ms-Icon--CircleFill blue')} />
+            <i className={C({'dn':docker !== 'Custom'},'v-top nl2_9 ms-Icon ms-Icon--StatusCircleCheckmark white')} />
+            <i className= {C({"dn":id === 4,},"pointer mr3 fr f7 ms-Icon ms-Icon--ChevronDownMed black-30")}
+             onClick= {() => { this.items= 'Custom', this.onPresetChosen('Custom',4)}}
+            />
+            <i className={C({'dn':id !== 4,},"pointer mr3 fr f7 ms-Icon ms-Icon--ChevronUpMed black-30")}
+            onClick= {()=> this.setState({id:10})}
+            />
             { id === 4 ? this.a : <div></div>}
           </li>
         </ul>

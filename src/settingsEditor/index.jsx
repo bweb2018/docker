@@ -21,6 +21,7 @@ export default class SettingsEditor extends React.Component {
   render() {
     const { settings, value, disabled, content, baseDockers, isAdd, putAdd, addValue, addSteps, baseDocker } = this.props;
     const t = content? content.type:''
+    const image_url = baseDockers ? baseDockers.baseDocker.image_url:''
     return settings.map((setting, i) => {
       let { label } = setting;
       if (!label) {
@@ -37,7 +38,7 @@ export default class SettingsEditor extends React.Component {
             <TextFields
               t={t}
               label={label}
-              value={value[setting.name]}
+              value={value[setting.name]||image_url}
               onUpdate={val => this.onUpdate(setting.name, val)}
               validate={val => validate(setting, val)}
               disabled={setting.disabled || disabled}
@@ -45,8 +46,6 @@ export default class SettingsEditor extends React.Component {
           );
           break;
         case 'choice':
-            console.log('choice')
-           
           contents = (
             <ChoiceGroup
               addSteps={addSteps}
@@ -64,7 +63,6 @@ export default class SettingsEditor extends React.Component {
           );
           break;
         case 'table':
-            console.log('table')
           contents = (
             <TableEditor
               label={label}

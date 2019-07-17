@@ -208,9 +208,10 @@ class App extends React.Component {
   render() {
     const { config, content, baseDockers, runSteps, enSteps, addValue } = this.state;
     const docker = baseDockers? baseDockers: ''
+    console.log(content.type);
     const { image_url } = docker.baseDocker ? docker.baseDocker :''
     return (
-      <div className="helvetica flex flex-column vh-100">
+      <div className="helvetica black-80 flex flex-column vh-100">
         {/*<Title*/}
         {/*  config={config}*/}
         {/*  onUpdate={this.onUpdate}*/}

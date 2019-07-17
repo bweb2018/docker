@@ -53,16 +53,9 @@ class Bar extends React.Component {
             i = ni.id
             return ni.id === k.key
         });
-        // config.run_steps.splice(idx, 1);
-        // config.entrypoint_steps.splice(idx, 1);
-        // onUpdate(entrypointNewItems);
         if(n === k.key){
-            // console.log(runNewItems[idx])
-            // addSteps(runNewItems[idx],'run')
             onSwitchContent({ type: 'edit_run_step', stepToEdit: runSteps[idx] })
         }else if(i === k.key){
-          
-            // addSteps(entrypoint_steps[id],'entrypoint')
             onSwitchContent({ type: 'edit_entrypoint_step', stepToEdit:  enSteps[id] })
         }
     }
@@ -77,7 +70,6 @@ class Bar extends React.Component {
         this.run_steps =  this.getStep(runSteps)
         this.entrypoint_steps = this.getStep(enSteps)
         let docker = baseDockers ? baseDockers.baseDocker.image_url: ''
-        const icons = ['StatusCircleCheckmark','CircleFill']
         return (
             <div>
             <Nav
@@ -85,8 +77,8 @@ class Bar extends React.Component {
                 onLinkClick={this._onLinkClick}
                 styles={{
                     chevronIcon: {color: yellow},
-                    root: { width: 290 },
-                    link: { height: 52, whiteSpace: 'pre', lineHeight: 10 }
+                    root: { width: 290},
+                    link: { height: 52, whiteSpace: 'pre', lineHeight: 10, color:'#333' }
                 }}
                 groups={[
                     {

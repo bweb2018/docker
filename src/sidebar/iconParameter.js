@@ -4,7 +4,7 @@ export const from =  {
     bl:1,
     color:'green',
     lef:'225px',
-    top:'-34px'
+    top:'-30px'
 }
 export const general = {
     name:'CircleFill',
@@ -12,5 +12,5 @@ export const general = {
     bl:0,
     color:'green',
     lef:'225px',
-    top:'-34px'
+    top:'-30px'
 }
