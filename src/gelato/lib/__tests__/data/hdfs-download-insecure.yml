@@ -1,0 +1,16 @@
+---
+version: '0.1'
+env_variables: {}
+workdir: '/root'
+base_docker:
+  image_url: tensorflow/tensorflow
+  os: ubuntu
+run_steps: []
+entrypoint_steps:
+- step_type: hdfs_download
+  config:
+    url: http://10.151.40.234:50070
+    client_type: InsecureClient
+    source_path: '/Test/cntk/Data'
+    destination_path: '~/Data'
+    user: core

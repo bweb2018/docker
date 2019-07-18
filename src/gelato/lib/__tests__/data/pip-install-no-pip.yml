@@ -1,0 +1,14 @@
+---
+version: '0.1'
+env_variables: {}
+workdir: '/root'
+base_docker:
+  image_url: tensorflow/tensorflow
+  os: ubuntu
+run_steps: []
+entrypoint_steps:
+- step_type: pip_install
+  config:
+    python3: true
+    packages:
+    - tensorflow
