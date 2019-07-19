@@ -78,28 +78,28 @@ import {validateConfig} from "../config-utils";
       });
     }
   }
-    putAdd (t,v) {
-      console.log(t);
+    putAdd (t) {
       t.setState({
         isAdd: false 
       })
     }
+    onRef =  (value) => {
+      this.custom = value
+    }
     _clicked () {
-      const {  baseDocker, th, text, baseDockers } = this
+      const {  baseDocker, th, text } = this
       const { items, props:{addSteps, addIcon} } = th
-      const { image_url } = baseDockers ? baseDockers.baseDocker:''
-      if(baseDocker.invalid || image_url){
-        alert('docker should not be empty')
-        return
-      }
-      
       if (text === 'Apply') {
-        if(!baseDocker.image_url) return
         th.setState({
           isShow: false,
           isAdd: true
         })
+        if(!items === 'Custom') th.custom =''
         if (items === 'Custom') {
+          if(!th.custom){
+            alert('docker should not be empty')
+            return
+          }
           th.setState({
             isShow: true,
             isAdd: true
@@ -108,6 +108,7 @@ import {validateConfig} from "../config-utils";
           th.setState({docker:items})
           addIcon({on: 'docker', type: 'from', iconParameter})
           addSteps({baseDocker,items}, 'baseDockers')
+          th.custom = ''
           return
         }  
         th.setState({docker:items})
@@ -131,7 +132,7 @@ import {validateConfig} from "../config-utils";
         const th = this
         const { isShow } = this.state
         const presetBase = baseDockers? baseDockers.baseDocker.presetBase ? cloneDeep(baseDockers.baseDocker.presetBase ) : 'a': ''
-        return baseDocker.presetBase === presetBase || isShow  ?  <DefaultButton
+        return baseDocker.presetBase === presetBase || this.items==='Custom' && isShow || this.items==='Custom' && this.image_url  ?  <DefaultButton
             baseDocker={baseDocker}
             th={th}
             styles={{root:{border:'none'}}}
@@ -150,12 +151,15 @@ import {validateConfig} from "../config-utils";
       const { config: { base_docker: baseDocker }, baseDockers, addValue, addSteps, addIcon} = this.props;
       const { id,isAdd } = this.state
       const docker = baseDockers.items? baseDockers.items:''
+      this.image_url = baseDockers && baseDockers.items === 'Custom'?  baseDockers.baseDocker.image_url:''
       if (baseDocker.custom) {
       this.a = <div className='black-60'>
                 <div className="mv2">Custom Base Docker</div>
                 <SettingsEditor
                 addValue={addValue}
                 addSteps={addSteps}
+                onRef={this.onRef}
+                image_url={this.image_url}
                 baseDockers={baseDockers}
                 settings={Settings.docker}
                 isAdd={isAdd}

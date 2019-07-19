@@ -19,10 +19,8 @@ export default class SettingsEditor extends React.Component {
   }
 
   render() {
-    const { settings, value, disabled, content, baseDockers, isAdd, putAdd, addValue, addSteps, baseDocker } = this.props;
+    const { settings, value, disabled, content, baseDockers, isAdd, putAdd, addValue, addSteps, baseDocker, image_url, onRef } = this.props;
     const t = content? content.type:''
-    console.log(putAdd);
-    const image_url = baseDockers ? baseDockers.baseDocker.image_url:''
     return settings.map((setting, i) => {
       let { label } = setting;
       if (!label) {
@@ -39,6 +37,8 @@ export default class SettingsEditor extends React.Component {
               t={t}
               label={label}
               putAdd={putAdd}
+              onRef={onRef}
+              image_url={image_url}
               value={value[setting.name]}
               onUpdate={val => this.onUpdate(setting.name, val)}
               validate={val => validate(setting, val)}
@@ -47,7 +47,6 @@ export default class SettingsEditor extends React.Component {
           );
           break;
         case 'choice':
-          console.log('choice');
           contents = (
             <ChoiceGroup
               addSteps={addSteps}
@@ -69,7 +68,6 @@ export default class SettingsEditor extends React.Component {
             <TableEditor
               label={label}
               t={t}
-              putAdd={putAdd}
               value={value[setting.name]}
               onUpdate={val => this.onUpdate(setting.name, val)}
               validate={val => validate(setting, val)}

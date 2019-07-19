@@ -31,7 +31,6 @@ class ChoiceGroup extends React.Component {
     const {
       label, options, onUpdate, disabled, baseDockers, addValue, baseDocker, putAdd
     } = this.props;
-    console.log(putAdd);
     let arr
     const isShow = baseDocker && baseDockers.baseDocker  ? baseDocker.presetBase === baseDockers.baseDocker.presetBase : baseDockers ? baseDockers.baseDocker.custom || false: false  
     if(addValue && addValue.length > 0){

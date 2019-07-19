@@ -17,8 +17,7 @@ export default class TableEditor extends React.Component {
 
   onChange(row, col, val) {
    
-    const { value, putAdd } = this.props;
-    // console.log(putAdd);
+    const { value } = this.props;
     const newVal = cloneDeep(value);
     newVal[row][col] = val;
     this.validateAndUpdate(newVal);
@@ -51,7 +50,7 @@ export default class TableEditor extends React.Component {
   render() {
     const { invalid } = this.state;
     const {
-      label, value, headers, disabled, t, putAdd
+      label, value, headers, disabled, t
     } = this.props;
     const flatHeaders = headers.map(x => (
       typeof x === 'object' ? x.name : x
@@ -129,7 +128,6 @@ export default class TableEditor extends React.Component {
 
 TableEditor.propTypes = {
   label: PropTypes.node.isRequired,
-  putAdd: PropTypes.func.isRequired,
   headers: PropTypes.arrayOf(models.tableHeader).isRequired,
   // eslint-disable-next-line
   value: PropTypes.array,

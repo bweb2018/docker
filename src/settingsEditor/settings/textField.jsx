@@ -12,12 +12,20 @@ export default class TextFields extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
   }
-
+  componentDidMount() {
+    const { onRef } = this.props
+    if(onRef) onRef(this.item)
+    if(this.item) this.setState({ invalid: false })
+  }
+  componentWillUpdate() {
+    const { onRef } = this.props
+    if(onRef) onRef(this.item)
+  }
   onChange(values) {
-    const { onUpdate, validate, putAdd } = this.props;
+    const { onUpdate, validate } = this.props;
     const value = values ? values : ''
+    this.item = value
     if (validate(value)) {
-      putAdd('a',value)
       this.setState({ invalid: false });
     } else {
       this.setState({ invalid: true });
@@ -31,7 +39,8 @@ export default class TextFields extends React.Component {
   render() {
     const { invalid } = this.state;
     const errorMessage = invalid ? 'docker should not be empty' : ''
-    const { value, label, disabled, t } = this.props;
+    const { value, label, disabled, t, image_url } = this.props;
+    this.item = label === 'Base Docker URL' ? image_url || this.item: value
     return (
       <>
         <div className={C({ red: invalid})} className={t ==='add_run_step' || t === 'add_entrypoint_step' ? 'mb0':'mb3'}>{label}</div>
@@ -42,7 +51,7 @@ export default class TextFields extends React.Component {
                   <TextField className={C({'dn':t==='add_run_step' || t=== 'add_entrypoint_step'})} 
                     errorMessage={errorMessage} 
                     onChange ={this._inputMessage} 
-                    defaultValue={value}  
+                    defaultValue={this.item}  
                     required placeholder="Enter text here" 
                     label="Required:"
                     underlined 
