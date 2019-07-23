@@ -1,0 +1,26 @@
+{
+  "name": "Conda Install",
+  "type": "conda_install",
+  "command": [
+    "run",
+    "entrypoint"
+  ],
+  "config": [
+    {
+      "label": "Packages to install",
+      "name": "packages",
+      "type": "table",
+      "headers": [
+        {
+          "name": "Package",
+          "unique": true
+        }
+      ],
+      "transform": "flatarray"
+    }
+  ],
+  "os": [
+    "ubuntu",
+    "debian"
+  ]
+}

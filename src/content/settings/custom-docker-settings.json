@@ -1,0 +1,23 @@
+[
+  {
+    "label": "Base Docker URL",
+    "name": "image_url",
+    "type": "text",
+    "required": true
+  },
+  {
+    "label": "Operation System",
+    "name": "os",
+    "type": "choice",
+    "options": [
+      {
+        "iconClass": "devicon-ubuntu-plain colored",
+        "name": "ubuntu"
+      },
+      {
+        "iconClass": "devicon-debian-plain colored",
+        "name": "debian"
+      }
+    ]
+  }
+]

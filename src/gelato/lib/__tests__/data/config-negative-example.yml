@@ -1,0 +1,26 @@
+---
+env_variables:
+  TENSORFLOW_VERSION: 1.4.0
+  LC_ALL: C
+workdir: '/root'
+base_docker: pai.build.base:hadoop2.7.2-cuda9.0-cudnn7-devel-ubuntu16.04
+steps:
+- step_type: components
+  config:
+    name: python
+    version: '3.6'
+- step_type: conda_install
+  config:
+    name: tensorflow-gpu
+    version: 1.4.0
+- step_type: git_clone
+  config:
+    url: https://github.com/debuggy/DockerForPAI_init.git
+    branch: master
+    tag: v0.1
+- step_type: python_script
+  config:
+    python_code: print("hello world!")
+- step_type: custom
+  config:
+    command: python hello.py
