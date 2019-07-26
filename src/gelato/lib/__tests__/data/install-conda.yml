@@ -1,0 +1,22 @@
+---
+version: '0.1'
+env_variables: {}
+workdir: '/root'
+base_docker:
+  image_url: tensorflow/tensorflow
+  os: ubuntu
+  bit: '64'
+run_steps:
+- step_type: install_conda
+  config:
+    python_version: '3.6'
+    conda_version: '4.5.11'
+    bit: '64'
+- step_type: conda_install
+  config:
+    packages:
+    - scipy
+entrypoint_steps:
+- step_type: custom_command
+  config:
+    command: conda -V

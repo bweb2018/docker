@@ -1,0 +1,47 @@
+{
+  "name": "Ubuntu",
+  "base": "ubuntu",
+  "icon": "devicon-ubuntu-plain",
+  "config": [
+    {
+      "label": "Customize Docker",
+      "name": "tag",
+      "type": "tag-group",
+      "groupLabels": [
+        "Version"
+      ],
+      "tags": [
+        {
+          "tagList": [
+            "18.04 (bionic)"
+          ],
+          "name": "18.04"
+        },
+        {
+          "tagList": [
+            "18.10 (cosmic)"
+          ],
+          "name": "18.10"
+        },
+        {
+          "tagList": [
+            "19.04 (disco)"
+          ],
+          "name": "19.04"
+        },
+        {
+          "tagList": [
+            "14.04 (trusty)"
+          ],
+          "name": "14.04"
+        },
+        {
+          "tagList": [
+            "16.04 (xenial)"
+          ],
+          "name": "16.04"
+        }
+      ]
+    }
+  ]
+}
