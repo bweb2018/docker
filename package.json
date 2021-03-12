@@ -68,7 +68,7 @@
     "react": ">=15.0.0",
     "react-app-polyfill": "^1.0.1",
     "react-beautiful-dnd": "^10.0.1",
-    "react-dev-utils": "^9.0.1",
+    "react-dev-utils": "^11.0.4",
     "react-dom": ">=15.0.0",
     "react-s-alert": "^1.4.1",
     "react-toastify": "^5.1.1",
